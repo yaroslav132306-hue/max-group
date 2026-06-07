@@ -1,0 +1,3735 @@
+<!DOCTYPE html>
+<html lang="ru" data-route="main">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Шоурум на отдельном домене: замените на боевой URL -->
+  <script>window.__SHOWROOM_ORIGIN = "https://showroom.example.com";</script>
+  <title>Maxi Group — строительство домов под ключ в Туле и области</title>
+  <meta name="description" content="Полный комплекс строительно-монтажных работ. Дома под ключ, благоустройство, отделка. Тула, Тульская область.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --surface-2: #1a1a1a;
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.88);
+      --accent: #c4a574;
+      --accent-dim: rgba(196, 165, 116, 0.15);
+      --mega-grad: linear-gradient(90deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.55) 38%, rgba(255, 255, 255, 0.14) 72%, rgba(255, 255, 255, 0.03) 100%);
+      --header-h: clamp(76px, 18vw, 132px);
+      --max: 1200px;
+      --page-pad: clamp(16px, 2.4vw, 20px);
+      --page-pad-mobile: clamp(20px, 5.5vw, 28px);
+    }
+    body {
+      font-family: "Manrope", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      font-size: 18px;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; height: auto; display: block; }
+    .arrow-link::after {
+      content: " →";
+      color: #fff;
+      font-weight: 500;
+    }
+    /* Header after scroll (hero = самодостаточный первый экран) */
+    .header-scroll {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: var(--header-h);
+      background: rgba(12, 12, 14, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: none;
+      transform: translateY(-100%);
+      opacity: 0;
+      visibility: hidden;
+      transition: transform 0.35s ease, opacity 0.35s ease, visibility 0.35s;
+    }
+    body.is-past-hero .header-scroll {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+    .header {
+      height: var(--header-h);
+      border-bottom: none;
+    }
+    .header-inner {
+      max-width: none;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 var(--page-pad);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .logo {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: 0.02em;
+    }
+    .logo span { color: #fff; opacity: 0.92; }
+    .logo.logo--mark {
+      display: flex;
+      align-items: center;
+      line-height: 0;
+      text-decoration: none;
+      color: inherit;
+    }
+    .logo.logo--mark:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.85);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    .logo__img {
+      display: block;
+      height: clamp(88px, 14.4vw, 120px);
+      width: auto;
+      max-width: min(672px, 92vw);
+      object-fit: contain;
+      object-position: left center;
+    }
+    .nav-desktop {
+      display: none !important;
+    }
+    .header-contact {
+      display: none !important;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 22px;
+      font-family: inherit;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0c0c0e;
+    }
+    .btn-primary:hover { filter: brightness(1.08); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: rgba(255, 255, 255, 0.45); color: #fff; }
+    .menu-toggle {
+      min-height: 44px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .header-scroll .header-cta-link {
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .header-scroll .header-cta-link:hover {
+      opacity: 0.85;
+    }
+    .header-scroll .header-cta-link:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.85);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+    .menu-toggle:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.85);
+      outline-offset: 2px;
+    }
+    .header-scroll__right {
+      display: flex;
+      align-items: center;
+      gap: clamp(12px, 3vw, 24px);
+    }
+    .header-scroll__links {
+      display: flex;
+      align-items: center;
+      gap: clamp(18px, 2.8vw, 34px);
+    }
+    .header-scroll__links a {
+      font-size: clamp(1rem, 1.65vw, 1.12rem);
+      font-weight: 500;
+      text-transform: lowercase;
+      color: #fff;
+      white-space: nowrap;
+    }
+    .header-scroll__links a:hover {
+      opacity: 0.84;
+    }
+    .nav-link.is-active {
+      text-decoration: underline;
+      text-underline-offset: 0.35rem;
+      text-decoration-thickness: 1px;
+      text-decoration-color: rgba(255, 255, 255, 0.88);
+    }
+    @media (max-width: 640px) {
+      .header-scroll {
+        height: auto;
+        min-height: var(--header-h);
+      }
+      .header.header-scroll {
+        height: auto;
+        min-height: var(--header-h);
+      }
+      .header-inner {
+        flex-wrap: nowrap;
+        align-items: center;
+        align-content: center;
+        row-gap: 0;
+        column-gap: 14px;
+        height: auto;
+        min-height: var(--header-h);
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+      .logo {
+        flex: 0 1 auto;
+        min-width: 0;
+        line-height: 1.2;
+        font-size: 0.92rem;
+      }
+      .logo__img {
+        max-width: min(280px, 78vw);
+        height: clamp(52px, 14vw, 72px);
+      }
+      .header-scroll__links,
+      .header-scroll .header-cta-link {
+        display: none !important;
+      }
+      .header-scroll__right {
+        flex: 0 0 auto;
+        margin-left: auto;
+        width: auto;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0;
+        min-width: 0;
+      }
+      .menu-toggle {
+        margin-left: 0;
+        flex-shrink: 0;
+      }
+      .header-scroll .menu-toggle {
+        min-height: 40px;
+        padding: 8px 6px;
+        border: none;
+        background: transparent;
+        font-family: "Montserrat", system-ui, sans-serif;
+        font-weight: 700;
+        font-size: 0.78rem;
+        letter-spacing: 0.06em;
+        color: #fff;
+        text-shadow:
+          0.5px 0 0 rgba(255, 55, 85, 0.42),
+          -0.5px 0 0 rgba(55, 195, 255, 0.38);
+      }
+      .hero-volga__top {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px 14px;
+        padding-top: max(4px, env(safe-area-inset-top, 0px));
+        padding-bottom: clamp(6px, 1.4vw, 12px);
+      }
+      .hero-brand {
+        line-height: 0.92;
+      }
+      .hero-brand__img {
+        width: min(72vw, 300px);
+        max-height: clamp(52px, 16vw, 88px);
+      }
+      .hero-volga__tagline {
+        max-width: none;
+        font-size: clamp(0.95rem, 4.1vw, 1.12rem);
+      }
+      .hero-volga__top {
+        width: 100%;
+        left: 0;
+        transform: none;
+      }
+      .hero-brand__serif,
+      .hero-brand__sans {
+        font-size: clamp(1.22rem, 4.35vw, 1.92rem);
+      }
+      .hero-volga__curtain {
+        flex: 1 1 auto;
+        min-width: 0;
+        width: auto;
+        justify-content: flex-end;
+        align-items: center;
+      }
+      .hero-volga__actions {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        row-gap: 8px;
+        column-gap: clamp(12px, 3vw, 20px);
+        text-align: right;
+        padding-left: 0;
+        padding-right: 0;
+        max-width: 100%;
+        font-size: clamp(0.82rem, 2.9vw, 0.98rem);
+      }
+      .hero-volga__actions a {
+        line-height: 1.35;
+      }
+      .hero-volga__actions .nav-link {
+        display: none !important;
+      }
+      .hero-volga__menu {
+        font-family: "Montserrat", system-ui, sans-serif;
+        font-size: clamp(0.74rem, 2.65vw, 0.88rem);
+        font-weight: 700;
+        text-transform: none;
+        letter-spacing: 0.06em;
+        padding: 8px 4px;
+        color: #fff;
+        text-shadow:
+          0.5px 0 0 rgba(255, 55, 85, 0.42),
+          -0.5px 0 0 rgba(55, 195, 255, 0.38);
+      }
+      .hero-volga__middle {
+        display: flex;
+        align-items: flex-start;
+        padding: 0;
+        margin-top: auto;
+        margin-bottom: clamp(14px, 3.2vh, 22px);
+      }
+      .hero-volga__links a {
+        font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+      }
+      .hero-volga__tagline {
+        padding-left: 2px;
+        padding-right: 2px;
+        padding-bottom: max(12px, env(safe-area-inset-bottom, 0px));
+      }
+      .hero-volga__inner {
+        padding-left: max(var(--page-pad-mobile), env(safe-area-inset-left, 0px));
+        padding-right: max(var(--page-pad-mobile), env(safe-area-inset-right, 0px));
+      }
+    }
+    /* Компактная вертикальная панель меню (не на весь экран) */
+    .nav-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 198;
+      background: rgba(0, 0, 0, 0.45);
+    }
+    body.nav-panel-open .nav-backdrop {
+      display: block;
+    }
+    .nav-panel {
+      position: fixed;
+      z-index: 199;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      margin: 0;
+      padding: 14px var(--page-pad);
+      background: rgba(17, 17, 17, 0.98);
+      border-bottom: none;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+      overflow: hidden;
+      transform: translateY(calc(-100% - 8px));
+      opacity: 0;
+      visibility: hidden;
+      transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s;
+    }
+    body.nav-panel-open .nav-panel {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+    body.is-past-hero .nav-panel {
+      top: 0;
+    }
+    .nav-panel__title { display: none; }
+    .nav-panel a {
+      display: inline-flex;
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+      border: none;
+      border-radius: 999px;
+      margin: 0 8px 8px 0;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .nav-panel a:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.12);
+    }
+    /* Layout */
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    .section {
+      padding: 88px 0;
+      border-top: 1px solid var(--border);
+    }
+    /* Полная ширина как у «О компании» */
+    .section-full {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding: clamp(32px, 4.5vw, 52px) var(--page-pad);
+      border-top: 1px solid var(--border);
+      box-sizing: border-box;
+    }
+    .section-full > h2 {
+      text-align: center;
+    }
+    #services.section-full > h2 {
+      font-size: calc(clamp(1.5rem, 3vw, 2rem) + 0.1875rem);
+    }
+    .services-orbit__label {
+      font-size: calc(clamp(0.82rem, 2vw, 0.96rem) + 3px);
+    }
+    .section-actions {
+      text-align: center;
+      margin-top: 16px;
+    }
+    .section-full > p.muted {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+    h1, h2, h3 {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      line-height: 1.15;
+    }
+    h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); }
+    h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: clamp(18px, 2.5vw, 26px); }
+    h3 { font-size: 1.05rem; margin-bottom: 12px; }
+    .muted { color: var(--muted); font-size: 0.95rem; }
+    /* Hero — композиция как у volgafasad.ru: углы экрана, центр под фон */
+    .hero-volga {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100dvh;
+      color: #fff;
+      overflow: hidden;
+    }
+    .hero-volga__bg {
+      position: absolute;
+      inset: 0;
+      background-color: #0a0a0a;
+      background-image: url("assets/oblozka.png");
+      background-size: cover;
+      background-position: 82% center;
+      z-index: 0;
+    }
+    /* Затемняем угол с водяным знаком (Шедеврум и т.п.) без редактирования файла */
+    .hero-volga__bg::before {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: min(260px, 34vw);
+      height: min(110px, 20vh);
+      background: radial-gradient(
+        ellipse 120% 100% at 100% 100%,
+        #070707 0%,
+        #0a0a0a 50%,
+        rgba(10, 10, 10, 0.55) 78%,
+        transparent 100%
+      );
+      z-index: 2;
+      pointer-events: none;
+    }
+    .hero-volga__bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      /* Узкая «шторка» слева (под обрезанное лого): быстрый переход к прозрачности */
+      background: linear-gradient(
+        100deg,
+        rgba(0, 0, 0, 0.94) 0%,
+        rgba(0, 0, 0, 0.72) 11%,
+        rgba(0, 0, 0, 0.35) 21%,
+        rgba(0, 0, 0, 0.08) 34%,
+        transparent 48%
+      );
+    }
+    .hero-volga__inner {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 0 var(--page-pad) clamp(28px, 4.5vw, 56px);
+      max-width: 100%;
+    }
+    .hero-volga__top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px 28px;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      box-sizing: border-box;
+      margin-top: 0;
+      margin-bottom: clamp(10px, 1.8vw, 22px);
+      padding: max(6px, env(safe-area-inset-top, 0px)) var(--page-pad) clamp(6px, 1.2vw, 12px) var(--page-pad);
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-radius: 0;
+    }
+    .hero-volga__curtain {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+      align-self: flex-start;
+      min-width: 0;
+    }
+    .hero-brand {
+      display: block;
+      line-height: 0.95;
+      color: #fff;
+      flex: 0 0 auto;
+    }
+    .hero-brand.hero-brand--mark {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      text-decoration: none;
+      line-height: 0;
+    }
+    .hero-brand.hero-brand--mark:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.85);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+    .hero-brand__img {
+      display: block;
+      width: min(78vw, 420px);
+      max-width: 100%;
+      height: auto;
+      max-height: clamp(64px, 20vw, 140px);
+      object-fit: contain;
+      object-position: left center;
+      filter: none;
+    }
+    @media (min-width: 768px) {
+      .hero-brand__img {
+        width: min(88vw, 960px);
+        max-height: clamp(120px, 28vw, 320px);
+      }
+    }
+    .hero-brand__serif {
+      font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: clamp(3.15rem, 9.5vw, 5.85rem);
+      letter-spacing: -0.02em;
+    }
+    .hero-brand__sans {
+      font-family: "Manrope", system-ui, sans-serif;
+      font-weight: 800;
+      font-size: clamp(3.15rem, 9.5vw, 5.85rem);
+      letter-spacing: -0.04em;
+    }
+    .hero-volga__actions {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: clamp(18px, 2.6vw, 34px);
+      text-align: center;
+      font-size: clamp(0.95rem, 1.65vw, 1.12rem);
+      font-weight: 500;
+      margin-left: 0;
+      padding: clamp(8px, 1.2vw, 12px) clamp(18px, 2.4vw, 32px);
+      background: transparent;
+      border-radius: 999px;
+    }
+    .hero-volga__actions a {
+      text-decoration: none;
+      text-transform: lowercase;
+      color: #fff;
+    }
+    .hero-volga__actions a:hover,
+    .hero-volga__menu:hover {
+      opacity: 0.82;
+    }
+    .hero-volga__menu {
+      background: none;
+      border: none;
+      color: #fff;
+      font: inherit;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 0;
+      text-align: right;
+    }
+    .hero-volga__menu:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.85);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+    .hero-volga__middle {
+      display: flex;
+      align-items: center;
+      padding: clamp(24px, 6vh, 72px) 0;
+    }
+    @media (max-width: 1024px) {
+      .hero-volga__middle {
+        margin-top: auto;
+        margin-bottom: clamp(14px, 3.2vh, 22px);
+        padding: 0;
+      }
+      .hero-volga__inner {
+        padding-left: max(var(--page-pad-mobile), env(safe-area-inset-left, 0px));
+        padding-right: max(var(--page-pad-mobile), env(safe-area-inset-right, 0px));
+      }
+    }
+    .hero-volga__links {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(10px, 2vh, 18px);
+    }
+    .hero-volga__links a {
+      font-size: clamp(1.2rem, 2.65vw, 1.62rem);
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      line-height: 1.35;
+    }
+    .hero-volga__links a:hover {
+      opacity: 0.75;
+    }
+    .hero-volga__tagline {
+      max-width: 38rem;
+      font-size: clamp(1.1rem, 2.05vw, 1.38rem);
+      font-weight: 400;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.92);
+    }
+    .hero-volga__tagline p + p {
+      margin-top: 0.4rem;
+    }
+    @media (min-width: 1025px) {
+      .hero-volga__inner {
+        grid-template-rows: auto 1fr;
+        padding-top: 0;
+      }
+      .hero-volga__top {
+        justify-content: flex-end;
+        margin-bottom: 0;
+        padding-top: clamp(4px, 0.8vw, 8px);
+      }
+      /* Рамка под лого: крупный слот в левом верхнем углу (под обводку макета) */
+      .hero-brand.hero-brand--mark {
+        position: absolute;
+        top: env(safe-area-inset-top, 0px);
+        left: env(safe-area-inset-left, 0px);
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: min(46vw, 900px);
+        height: min(52vh, 720px);
+        min-width: 220px;
+        min-height: 200px;
+        box-sizing: border-box;
+      }
+      .hero-brand__img {
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        max-height: none;
+        object-fit: contain;
+        object-position: left top;
+      }
+      .hero-volga__middle {
+        position: absolute;
+        left: var(--page-pad);
+        top: auto;
+        bottom: clamp(8.5rem, 24vh, 12.5rem);
+        transform: none;
+        display: flex;
+        align-items: center;
+        padding: 0;
+        z-index: 2;
+      }
+      .hero-volga__tagline {
+        position: absolute;
+        left: var(--page-pad);
+        bottom: clamp(38px, 6vh, 58px);
+        max-width: min(72ch, 78vw);
+        z-index: 1;
+      }
+    }
+    /* «О компании» — сетка как у volgafasad.ru: колонка | (заголовок / нижний скролл) */
+    .about-volga-section {
+      padding: clamp(32px, 4.5vw, 52px) 0;
+      border-top: none;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
+    .about-volga-wrap {
+      max-width: none;
+      width: 100%;
+      margin: 0;
+      padding: 0 var(--page-pad);
+    }
+    .about-volga-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto;
+      background: var(--bg);
+      min-height: min(48vh, 460px);
+    }
+    .about-volga__rail {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    .about-volga__head {
+      grid-column: 1;
+      grid-row: 2;
+    }
+    .about-volga__deck {
+      grid-column: 1;
+      grid-row: 3;
+    }
+    @media (min-width: 768px) {
+      .about-volga-grid {
+        grid-template-columns: minmax(72px, 11%) 1fr;
+        grid-template-rows: auto 1fr;
+        min-height: min(44vh, 440px);
+      }
+      .about-volga__rail {
+        grid-column: 1;
+        grid-row: 1 / -1;
+      }
+      .about-volga__head {
+        grid-column: 2;
+        grid-row: 1;
+      }
+      .about-volga__deck {
+        grid-column: 2;
+        grid-row: 2;
+        min-height: 0;
+      }
+    }
+    @media (min-width: 1100px) {
+      .about-volga-grid {
+        grid-template-columns: minmax(88px, 13%) 1fr;
+      }
+    }
+    .about-volga__rail {
+      padding: clamp(14px, 2vw, 28px) clamp(10px, 1.5vw, 18px);
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(1.12rem, 2.05vw, 1.48rem);
+      font-weight: 500;
+      color: #fff;
+      letter-spacing: 0.02em;
+      text-align: center;
+    }
+    .about-volga__rail-em {
+      font-size: clamp(1.05rem, 1.85vw, 1.35rem);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    @media (min-width: 768px) {
+      .about-volga__rail {
+        align-self: stretch;
+      }
+    }
+    .about-volga__head {
+      padding: clamp(12px, 1.8vw, 22px) clamp(14px, 2.5vw, 28px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-volga__head h2 {
+      font-family: "Manrope", sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.2rem, 3.1vw, 2.05rem);
+      line-height: 1.35;
+      color: #fff;
+      margin: 0;
+      max-width: none;
+      text-align: center;
+    }
+    .about-volga__stat-val--long {
+      font-size: clamp(1.65rem, 4.5vw, 2.85rem);
+    }
+    .about-volga__stat-val--text {
+      font-size: clamp(1.85rem, 5vw, 3rem);
+    }
+    .about-volga__deck {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+    }
+    @media (max-width: 767px) {
+      .about-volga__deck {
+        min-height: min(260px, 48vh);
+      }
+    }
+    .about-volga__scroll-hint {
+      position: absolute;
+      top: 10px;
+      right: clamp(14px, 2.5vw, 28px);
+      z-index: 2;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.65);
+      pointer-events: none;
+    }
+    .about-volga__scroll {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      height: min(260px, 34vh);
+      min-height: 200px;
+      max-height: min(320px, 42vh);
+      overflow-x: hidden;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .about-volga__scroll::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+    .about-volga__slide {
+      flex: 0 0 100%;
+      width: 100%;
+      min-height: 0;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      padding: clamp(12px, 2vw, 20px) clamp(14px, 2.5vw, 28px);
+      align-content: center;
+      align-items: start;
+      box-sizing: border-box;
+      border-bottom: none;
+    }
+    .about-volga__slide:last-child {
+      border-bottom: none;
+    }
+    @media (min-width: 640px) {
+      .about-volga__slide {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+        align-items: end;
+        gap: clamp(14px, 3vw, 32px);
+      }
+    }
+    .about-volga__scroll > .about-volga__slide:nth-child(2) .about-volga__slide-text,
+    .about-volga__scroll > .about-volga__slide:nth-child(3) .about-volga__slide-text {
+      font-size: clamp(1.02rem, 1.68vw, 1.14rem);
+      line-height: 1.55;
+    }
+    .about-volga__scroll > .about-volga__slide:nth-child(3) .about-volga__stat-val {
+      font-size: clamp(2.75rem, 7.5vw, 4.45rem);
+    }
+    .about-volga__stat {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .about-volga__stat-val {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.5rem, 7vw, 4.25rem);
+      line-height: 0.95;
+      color: #fff;
+      letter-spacing: -0.03em;
+    }
+    .about-volga__stat-sub {
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      color: #fff;
+      opacity: 0.92;
+      line-height: 1.35;
+      max-width: 14ch;
+    }
+    .about-volga__slide-text {
+      font-size: clamp(0.95rem, 1.6vw, 1.08rem);
+      line-height: 1.55;
+      color: #fff;
+      opacity: 0.95;
+      margin: 0;
+      text-align: left;
+    }
+    @media (min-width: 640px) {
+      .about-volga__slide-text {
+        text-align: right;
+      }
+    }
+    /* Cards grid */
+    .cards {
+      display: grid;
+      gap: 16px;
+    }
+    @media (min-width: 640px) {
+      .cards.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 900px) {
+      .cards.cols-3 { grid-template-columns: repeat(3, 1fr); }
+      .cards.cols-4 { grid-template-columns: repeat(4, 1fr); }
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 18px 20px;
+      transition: border-color 0.2s;
+    }
+    .card h3 { color: #fff; }
+    .card .muted { color: var(--muted) !important; }
+    .card:hover { border-color: rgba(255, 255, 255, 0.2); }
+    .build-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 560px) {
+      .build-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 960px) {
+      .build-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .build-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .build-card:hover { border-color: rgba(255, 255, 255, 0.22); }
+    .build-card__media {
+      aspect-ratio: 4/3;
+      background: #141414;
+      overflow: hidden;
+    }
+    .build-card__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .build-card h3 {
+      padding: 14px 14px 16px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-align: center;
+      margin: 0;
+      color: #fff;
+    }
+    /* Подряд — схема с кругом и услугами */
+    .services-orbit {
+      --orbit-blue: #3b82f6;
+      max-width: 680px;
+      margin: 28px auto 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(150px, 38vmin) minmax(0, 1fr);
+      grid-template-rows: auto minmax(160px, 38vmin) auto;
+      gap: 18px 14px;
+      align-items: center;
+      justify-items: center;
+    }
+    .services-orbit__label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: clamp(0.82rem, 2vw, 0.96rem);
+      font-weight: 500;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .services-orbit__star {
+      color: var(--orbit-blue);
+      font-size: 1.05rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .services-orbit__label--tl {
+      grid-column: 1;
+      grid-row: 1;
+      justify-self: end;
+      flex-direction: row-reverse;
+      text-align: right;
+    }
+    .services-orbit__label--tr {
+      grid-column: 3;
+      grid-row: 1;
+      justify-self: start;
+      text-align: left;
+    }
+    .services-orbit__hub {
+      grid-column: 2;
+      grid-row: 2;
+      position: relative;
+      width: 100%;
+      max-width: min(38vmin, 270px);
+      aspect-ratio: 1;
+    }
+    .services-orbit__ring-outer {
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(59, 130, 246, 0.55);
+      pointer-events: none;
+    }
+    .services-orbit__ring-inner {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(59, 130, 246, 0.38);
+      pointer-events: none;
+    }
+    .services-orbit__img-wrap {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(59, 130, 246, 0.4);
+      background: #111;
+    }
+    .services-orbit__img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .services-orbit__label--bl {
+      grid-column: 1;
+      grid-row: 3;
+      justify-self: end;
+      flex-direction: row-reverse;
+      text-align: right;
+    }
+    .services-orbit__label--br {
+      grid-column: 3;
+      grid-row: 3;
+      justify-self: start;
+      text-align: left;
+    }
+    @media (max-width: 540px) {
+      .services-orbit {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto;
+        grid-template-areas:
+          "hub hub"
+          "tl tr"
+          "bl br";
+        gap: 14px 12px;
+      }
+      .services-orbit__hub {
+        grid-area: hub;
+        max-width: min(72vw, 260px);
+        margin: 4px auto 8px;
+      }
+      .services-orbit__label--tl {
+        grid-area: tl;
+        justify-self: end;
+        flex-direction: row-reverse;
+        text-align: right;
+        padding-right: 4px;
+      }
+      .services-orbit__label--tr {
+        grid-area: tr;
+        justify-self: start;
+        text-align: left;
+        padding-left: 4px;
+      }
+      .services-orbit__label--bl {
+        grid-area: bl;
+        justify-self: end;
+        flex-direction: row-reverse;
+        text-align: right;
+        padding-right: 4px;
+      }
+      .services-orbit__label--br {
+        grid-area: br;
+        justify-self: start;
+        text-align: left;
+        padding-left: 4px;
+      }
+    }
+    /* Numbered list (как блок «почему выбирают» на референсе) */
+    .features {
+      display: grid;
+      gap: 14px;
+    }
+    @media (min-width: 768px) {
+      .features { grid-template-columns: repeat(2, 1fr); }
+    }
+    .feature {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 14px;
+      padding: 18px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+    .feature-num {
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.35);
+      line-height: 1;
+    }
+    .feature h3 { color: #fff; }
+    .feature p { font-size: 0.9rem; color: var(--muted); margin-top: 8px; }
+    /* Благоустройство — фото слева, услуги справа */
+    .blago-layout {
+      display: grid;
+      gap: clamp(22px, 4vw, 40px);
+      align-items: stretch;
+      margin-top: 8px;
+    }
+    @media (min-width: 900px) {
+      .blago-layout {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: clamp(28px, 4.5vw, 48px);
+      }
+    }
+    .blago-layout__visual {
+      border-radius: 12px;
+      overflow: hidden;
+      background: #141414;
+      border: 1px solid var(--border);
+      width: 100%;
+      max-width: 100%;
+      margin-inline: 0;
+      min-height: 0;
+    }
+    .blago-layout__visual img {
+      width: 100%;
+      height: auto;
+      min-height: 210px;
+      max-height: min(52vh, 480px);
+      object-fit: cover;
+      display: block;
+    }
+    @media (min-width: 900px) {
+      .blago-layout__visual img {
+        max-height: min(52vh, 480px);
+      }
+    }
+    .blago-layout__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+    }
+    .blago-services {
+      display: grid;
+      gap: 18px 24px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) {
+      .blago-services {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    .blago-service-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: clamp(1.15rem, 2.45vw, 1.4rem);
+      line-height: 1.45;
+      color: #fff;
+    }
+    .blago-service-item__star {
+      flex-shrink: 0;
+      color: #3b82f6;
+      font-size: clamp(1.15rem, 2.45vw, 1.4rem);
+      line-height: 1.45;
+      margin-top: 2px;
+      text-shadow: 0 0 12px rgba(59, 130, 246, 0.45);
+    }
+    /* Коммерческие / типы объектов — иконки под заголовками */
+    .objects-type-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 560px) {
+      .objects-type-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .objects-type-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 22px 16px 20px;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .objects-type-card:hover {
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+    .objects-type-card__icon {
+      margin: 0 auto 14px;
+      width: min(120px, 40vw);
+      height: min(120px, 40vw);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .objects-type-card__icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .objects-type-card h3 {
+      margin: 0;
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+    /* Как мы работаем — сетка карточек 3×N */
+    .process-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 720px) {
+      .process-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+    }
+    .process-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px 16px;
+      align-self: start;
+    }
+    .process-card__num {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+    .process-card h3 {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #fff;
+      margin: 0 0 8px;
+      line-height: 1.3;
+    }
+    .process-card p {
+      margin: 0;
+      font-size: 0.8rem;
+      line-height: 1.45;
+      color: rgba(255, 255, 255, 0.88);
+    }
+    /* Наши работы — та же сетка, что у «Что мы строим»; клик открывает галерею */
+    .works-mount {
+      margin-top: 0;
+    }
+    .build-card--works {
+      cursor: pointer;
+    }
+    .build-card--works:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.55);
+      outline-offset: 2px;
+    }
+    .works-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 400;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 12px 12px;
+      background: rgba(4, 4, 6, 0.94);
+      box-sizing: border-box;
+    }
+    .works-lightbox[hidden] {
+      display: none !important;
+    }
+    .works-lightbox__close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      width: 44px;
+      height: 44px;
+      border: none;
+      background: transparent;
+      color: #fff;
+      font-size: 1.75rem;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .works-lightbox__nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .works-lightbox__nav--prev { left: 8px; }
+    .works-lightbox__nav--next { right: 8px; }
+    .works-lightbox__stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 0;
+    }
+    .works-lightbox__img {
+      max-width: 100%;
+      max-height: min(72vh, 800px);
+      object-fit: contain;
+    }
+    .works-lightbox__caption {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.75);
+      text-align: center;
+      max-width: 90vw;
+    }
+    .works-lightbox__thumbs {
+      display: flex;
+      gap: 6px;
+      margin-top: 12px;
+      padding: 8px 4px;
+      max-width: 100%;
+      overflow-x: auto;
+      scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+    }
+    .works-lightbox__thumb {
+      flex: 0 0 56px;
+      width: 56px;
+      height: 56px;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      overflow: hidden;
+      padding: 0;
+      cursor: pointer;
+      background: #222;
+    }
+    .works-lightbox__thumb[aria-current="true"] {
+      border-color: rgba(255, 255, 255, 0.65);
+    }
+    .works-lightbox__thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .works-error {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+      padding: 24px;
+    }
+    /* Reviews */
+    .review {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 20px 22px;
+    }
+    .review__head {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .review__avatar {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.95);
+    }
+    .review__body {
+      flex: 1;
+      min-width: 0;
+    }
+    .review__text {
+      color: #fff;
+      margin: 0;
+    }
+    .review-meta {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.72);
+      margin-top: 12px;
+    }
+    /* Отзывы — горизонтальная карусель */
+    .reviews-carousel {
+      position: relative;
+    }
+    .reviews-track {
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      margin: 0 calc(-1 * var(--page-pad));
+      padding: 0 var(--page-pad);
+    }
+    .reviews-track::-webkit-scrollbar {
+      display: none;
+    }
+    .reviews-slide {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      box-sizing: border-box;
+      padding-right: 12px;
+    }
+    .reviews-slide:last-child {
+      padding-right: 0;
+    }
+    .reviews-slide .review {
+      min-height: 100%;
+    }
+    .reviews-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .reviews-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.22);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+    .reviews-dot[aria-current="true"] {
+      background: #fff;
+    }
+    /* Логотипы поставщиков */
+    .supply-logos {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 560px) {
+      .supply-logos {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 900px) {
+      .supply-logos {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+    }
+    .supply-logo-card {
+      background: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 88px;
+    }
+    .supply-logo-card img {
+      max-width: 100%;
+      max-height: 52px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+    /* Контакты — монохромный тёмный блок */
+    .contact-volga-section {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding: clamp(40px, 5vw, 72px) 0 clamp(52px, 8vw, 100px);
+      border-top: none;
+      background: #0a0a0a;
+      color: #f5f5f5;
+      box-sizing: border-box;
+    }
+    .contact-volga-wrap {
+      padding: 0 var(--page-pad);
+    }
+    .contact-volga-grid {
+      display: grid;
+      gap: clamp(20px, 3vw, 36px);
+      align-items: start;
+    }
+    @media (min-width: 900px) {
+      .contact-volga-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: clamp(28px, 4vw, 52px);
+      }
+    }
+    .contact-volga__info .contact-volga__icon {
+      display: none !important;
+    }
+    .contact-volga__tag {
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(1.25rem, 2.9vw, 1.95rem);
+      font-weight: 500;
+      line-height: 1.28;
+      margin-bottom: clamp(18px, 2.8vw, 32px);
+      color: #fff;
+      text-align: left;
+      text-transform: lowercase;
+      letter-spacing: 0.02em;
+    }
+    .contact-volga__title {
+      font-family: "Manrope", sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.25rem, 2.9vw, 1.95rem);
+      line-height: 1.28;
+      max-width: 22ch;
+      margin: 0 0 clamp(28px, 4vw, 44px);
+      color: #fff;
+      text-align: left;
+    }
+    .contact-volga__line {
+      margin-bottom: 10px;
+    }
+    .contact-volga__line a {
+      font-size: clamp(1.08rem, 1.85vw, 1.28rem);
+      text-decoration: none;
+      color: #fff;
+      opacity: 0.92;
+      transition: opacity 0.2s ease;
+    }
+    .contact-volga__line a:hover {
+      opacity: 1;
+    }
+    .contact-volga__sub {
+      font-size: clamp(1rem, 1.45vw, 1.12rem);
+      margin-top: 18px;
+      margin-bottom: 0;
+      line-height: 1.5;
+      max-width: 36ch;
+      color: rgba(255, 255, 255, 0.72);
+    }
+    .contact-volga__form-wrap {
+      background: #111;
+      border: none;
+      padding: clamp(22px, 3.2vw, 32px);
+    }
+    .contact-volga__showroom {
+      font-size: clamp(1.05rem, 1.7vw, 1.2rem);
+      line-height: 1.5;
+      margin: 0 0 14px;
+      color: rgba(255, 255, 255, 0.94);
+    }
+    .contact-volga__showroom a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      color: #fff;
+    }
+    .contact-volga__form-hint {
+      font-size: clamp(0.98rem, 1.45vw, 1.08rem);
+      line-height: 1.5;
+      margin: 0 0 22px;
+      color: rgba(255, 255, 255, 0.62);
+    }
+    .contact-volga__form {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .contact-volga__form input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: none;
+      padding: 14px 16px;
+      color: #fff;
+      font-family: inherit;
+      font-size: clamp(1rem, 1.35vw, 1.08rem);
+      margin-bottom: 14px;
+    }
+    .contact-volga__form input::placeholder {
+      color: rgba(255, 255, 255, 0.38);
+    }
+    .contact-volga__form input:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.09);
+    }
+    .contact-volga__chk {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: clamp(0.92rem, 1.25vw, 1rem);
+      margin: 12px 0 18px;
+      line-height: 1.45;
+      width: 100%;
+      max-width: 100%;
+    }
+    .contact-volga__chk input[type="checkbox"] {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      margin: 3px 0 0;
+      accent-color: #fff;
+    }
+    .contact-volga__chk span {
+      flex: 1;
+      min-width: 0;
+      color: rgba(255, 255, 255, 0.78);
+    }
+    .contact-volga__chk a {
+      color: #fff;
+      text-decoration: underline;
+    }
+    .contact-volga__submit {
+      background: #fff;
+      border: none;
+      padding: 12px 22px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: #0a0a0a;
+      align-self: flex-start;
+      letter-spacing: 0.02em;
+    }
+    .contact-volga__submit:hover {
+      filter: brightness(0.94);
+    }
+    /* Градиент только на водяном Maxi Group */
+    .mega-brand {
+      margin-top: clamp(8px, 2vw, 16px);
+      margin-bottom: 0;
+      padding-bottom: 0.12em;
+      text-align: center;
+      overflow: visible;
+      line-height: 0.88;
+      user-select: none;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .mega-brand__serif,
+    .mega-brand__sans {
+      display: inline;
+      font-size: clamp(2.75rem, 14vw, 7.5rem);
+      letter-spacing: -0.045em;
+      background: var(--mega-grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+    .mega-brand__serif {
+      font-family: "Playfair Display", Georgia, serif;
+      font-style: italic;
+      font-weight: 600;
+    }
+    .mega-brand__sans {
+      font-family: "Manrope", sans-serif;
+      font-style: normal;
+      font-weight: 800;
+    }
+    /* ===== Redesign: monochrome + showroom ===== */
+    :root {
+      --accent: #fff;
+      --surface: #141414;
+      --surface-2: #1c1c1c;
+      --border: rgba(255, 255, 255, 0.22);
+      --muted: rgba(255, 255, 255, 0.72);
+    }
+    #build, #blago, #objects-type, #process, #services, #supply, #why, #works, #reviews {
+      display: none !important;
+    }
+    .hero-volga__actions a {
+      text-transform: none;
+      letter-spacing: 0.01em;
+    }
+    .hero-volga__links a {
+      font-size: clamp(1.1rem, 3.4vw, 2rem);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+    }
+    .hero-volga__tagline {
+      max-width: 40rem;
+    }
+    .hero-showroom-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 24px;
+      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #fff;
+      padding-bottom: 2px;
+    }
+    .about-summary {
+      margin-top: 28px;
+      font-size: clamp(1.25rem, 3vw, 2rem);
+      line-height: 1.35;
+      color: #fff;
+      max-width: min(26ch, calc(100% - 2 * var(--page-pad)));
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: var(--page-pad);
+      padding-right: var(--page-pad);
+      box-sizing: border-box;
+      width: 100%;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+    /* Блок 3: «для кого мы строим» — иерархия как в референсе, текст в разметке не меняем */
+    .arch-block {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      background: #0a0a0a;
+      color: #fff;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      overflow: clip;
+      overflow-x: clip;
+      --arch-frame-h: 100svh;
+    }
+    body.is-past-hero .arch-block {
+      --arch-frame-h: calc(100svh - var(--header-h));
+    }
+    .arch-block__shell {
+      position: relative;
+      display: grid;
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      grid-template-areas: "stack";
+    }
+    .arch-block__media {
+      grid-area: stack;
+      position: sticky;
+      top: 0;
+      height: var(--arch-frame-h);
+      min-height: var(--arch-frame-h);
+      background: #0a0a0a;
+      overflow: hidden;
+      display: block;
+    }
+    body.is-past-hero .arch-block__media {
+      top: var(--header-h);
+    }
+    .arch-block__media-inner {
+      height: 300%;
+      display: flex;
+      flex-direction: column;
+    }
+    .arch-block__media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.04) 50%,
+        rgba(0, 0, 0, 0.1) 100%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+    .arch-block__media-img {
+      flex: 0 0 calc(100% / 3);
+      width: 100%;
+      min-height: 0;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-color: #0a0a0a;
+    }
+    .arch-block__media-img--0 {
+      background-image: url("assets/3%2C1.png");
+    }
+    .arch-block__media-img--1 {
+      background-image: url("assets/3%2C2.png");
+    }
+    .arch-block__media-img--2 {
+      background-image: url("assets/3%2C3.png");
+    }
+    .arch-block__col--text {
+      grid-area: stack;
+      position: relative;
+      background: transparent;
+      min-width: 0;
+      padding: 0;
+      z-index: 2;
+    }
+    .arch-block__scroll-track {
+      position: relative;
+    }
+    .arch-block__spacers {
+      position: relative;
+      z-index: 0;
+    }
+    .arch-block__sentinel {
+      min-height: var(--arch-frame-h);
+      background: transparent;
+    }
+    .arch-block__overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .arch-block__overlay-inner {
+      position: sticky;
+      top: 0;
+      min-height: var(--arch-frame-h);
+      padding: clamp(52px, 7.5vw, 100px) clamp(40px, 5vw, 64px) clamp(40px, 6vw, 72px);
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      pointer-events: auto;
+      width: min(46%, 700px);
+      max-width: 100%;
+      margin-left: auto;
+      background: rgba(10, 10, 10, 0.55);
+    }
+    body.is-past-hero .arch-block__overlay-inner {
+      top: var(--header-h);
+      min-height: var(--arch-frame-h);
+    }
+    .arch-block__h1 {
+      margin: 0;
+      font-weight: 600;
+      font-size: clamp(2rem, 3.8vw, 3.35rem);
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      color: #fff;
+      max-width: none;
+    }
+    #archBlockKicker {
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      opacity: 0.88;
+    }
+    .arch-block__kicker-row {
+      margin-top: clamp(28px, 4.5vh, 48px);
+      margin-bottom: clamp(28px, 4.5vh, 48px);
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      align-items: center;
+      gap: clamp(18px, 2.2vw, 28px);
+      font-size: clamp(0.92rem, 1.2vw, 1.05rem);
+      color: rgba(255, 255, 255, 0.9);
+      text-transform: lowercase;
+    }
+    .arch-block__kicker-row::after { content: none; }
+    .arch-block__kicker-line {
+      position: relative;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.28);
+      overflow: hidden;
+    }
+    .arch-block__kicker-line::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: var(--arch-progress, 0%);
+      background: rgba(255, 255, 255, 0.9);
+      transition: width 0.35s ease;
+    }
+    .arch-block__panels {
+      position: relative;
+      flex: 1;
+      min-height: clamp(300px, 38vh, 420px);
+    }
+    .arch-block__panel {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+      pointer-events: none;
+      display: block;
+    }
+    .arch-block__panel.is-active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .arch-block__panel-main {
+      min-width: 0;
+    }
+    .arch-block__h2 {
+      margin: 0 0 clamp(20px, 2.8vw, 28px);
+      font-weight: 600;
+      font-size: clamp(1.75rem, 2.5vw, 2.35rem);
+      line-height: 1.15;
+      color: #fff;
+      letter-spacing: -0.012em;
+    }
+    .arch-block__body {
+      font-size: clamp(1.05rem, 1.35vw, 1.22rem);
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: none;
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+    .arch-block__body p {
+      margin: 0 0 clamp(14px, 2.4vh, 22px);
+    }
+    .arch-block__body p:last-child {
+      margin-bottom: 0;
+    }
+    @media (max-width: 960px) {
+      .arch-block {
+        background: #0a0a0a;
+        color: #fff;
+      }
+      .arch-block__shell {
+        display: grid;
+        grid-template-areas: "stack";
+      }
+      .arch-block__media {
+        display: block;
+        grid-area: stack;
+      }
+      .arch-block__media-img {
+        background-size: cover;
+        background-position: center center;
+      }
+      .arch-block__col--text {
+        grid-area: stack;
+        padding: 0;
+      }
+      .arch-block__sentinel {
+        min-height: var(--arch-frame-h);
+      }
+      .arch-block__overlay-inner {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        padding: clamp(28px, 6vw, 44px) clamp(18px, 5vw, 28px);
+        min-height: var(--arch-frame-h);
+        background: rgba(10, 10, 10, 0.5);
+        box-sizing: border-box;
+      }
+      body.is-past-hero .arch-block__overlay-inner {
+        top: var(--header-h);
+        min-height: var(--arch-frame-h);
+      }
+      .arch-block__h1 {
+        color: #fff;
+        font-size: clamp(1.85rem, 5.4vw, 2.65rem);
+        max-width: none;
+      }
+      .arch-block__kicker-row {
+        color: rgba(255, 255, 255, 0.9);
+        margin-top: clamp(22px, 4vw, 30px);
+        margin-bottom: clamp(18px, 3vw, 24px);
+      }
+      .arch-block__kicker-row::after {
+        background: rgba(255, 255, 255, 0.28);
+      }
+      .arch-block__panel {
+        display: block;
+      }
+      .arch-block__h2 {
+        color: #fff;
+        font-size: clamp(1.45rem, 4.8vw, 2.15rem);
+        margin-bottom: clamp(14px, 2.5vw, 20px);
+      }
+      .arch-block__body {
+        color: rgba(255, 255, 255, 0.92);
+        max-width: none;
+        font-size: clamp(1.05rem, 3.2vw, 1.28rem);
+        line-height: 1.45;
+        overflow-wrap: break-word;
+        word-break: normal;
+      }
+    }
+
+    /* Блок 6 — макет: слева текст, справа карусель на всю ширину секции; стрелки + свайп */
+    .featured {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      background: #0a0a0a;
+      color: #f5f5f5;
+      border-top: none;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .featured__row {
+      display: grid;
+      grid-template-columns: minmax(200px, 30%) minmax(0, 1fr);
+      align-items: stretch;
+      min-height: min(78vh, 880px);
+    }
+    .featured__slider-col {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      justify-content: center;
+    }
+    .featured__intro {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(40px, 6vw, 72px) clamp(16px, 3vw, 28px) clamp(40px, 6vw, 72px) var(--page-pad);
+      box-sizing: border-box;
+    }
+    .featured__intro-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      flex: 1;
+      gap: clamp(28px, 5vw, 48px);
+      padding-top: clamp(36px, 6vw, 64px);
+    }
+    .featured__label {
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(1.15rem, 2.4vw, 1.65rem);
+      font-weight: 600;
+      text-transform: lowercase;
+      letter-spacing: 0.02em;
+      line-height: 1.35;
+      margin: 0;
+      max-width: 36ch;
+      color: #fff;
+    }
+    .featured__quote {
+      font-family: "Manrope", sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.15rem, 2.4vw, 1.65rem);
+      line-height: 1.35;
+      margin: 0;
+      max-width: 36ch;
+      color: #fff;
+    }
+    .featured__carousel-wrap {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      padding: clamp(28px, 4vw, 48px) var(--page-pad) clamp(12px, 2vw, 20px) var(--page-pad);
+      box-sizing: border-box;
+      min-width: 0;
+    }
+    .featured__viewport {
+      flex: 1;
+      min-width: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      border-radius: 0;
+      background: rgba(255, 255, 255, 0.05);
+      touch-action: pan-x;
+      cursor: grab;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.42) rgba(255, 255, 255, 0.08);
+    }
+    .featured__viewport::-webkit-scrollbar {
+      height: 10px;
+    }
+    .featured__viewport::-webkit-scrollbar-track {
+      margin: 0 clamp(4px, 1vw, 12px);
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+    }
+    .featured__viewport::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.42);
+      border-radius: 999px;
+      border: 2px solid transparent;
+      background-clip: padding-box;
+    }
+    .featured__viewport.is-dragging {
+      cursor: grabbing;
+    }
+    .featured__track {
+      display: flex;
+      gap: 10px;
+      width: max-content;
+      padding-right: var(--page-pad);
+      padding-bottom: 10px;
+      box-sizing: border-box;
+    }
+    .featured__slide {
+      flex: 0 0 clamp(260px, 72vw, 400px);
+      width: clamp(260px, 72vw, 400px);
+      min-width: clamp(260px, 72vw, 400px);
+      position: relative;
+      box-sizing: border-box;
+      scroll-snap-align: start;
+      cursor: pointer;
+    }
+    @media (min-width: 1100px) {
+      .featured__slide {
+        flex: 0 0 min(380px, 36vw);
+        width: min(380px, 36vw);
+        min-width: min(380px, 36vw);
+      }
+    }
+    .featured__slide img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+    }
+    .featured__caption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: clamp(12px, 2vw, 18px) clamp(14px, 2vw, 20px);
+      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.65));
+      color: #fff;
+      font-size: clamp(0.82rem, 1.3vw, 0.92rem);
+      line-height: 1.35;
+    }
+    .featured__caption strong {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .featured__slider-col .featured__dots-wrap {
+      padding: 0 var(--page-pad) clamp(32px, 5vw, 56px) 0;
+      box-sizing: border-box;
+    }
+    .featured__dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 0 auto;
+      max-width: none;
+    }
+    .featured__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: none;
+      padding: 0;
+      background: rgba(255, 255, 255, 0.28);
+      cursor: pointer;
+    }
+    .featured__dot[aria-current="true"] {
+      width: 28px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.88);
+    }
+    @media (max-width: 900px) {
+      .featured__row {
+        grid-template-columns: 1fr;
+        min-height: 0;
+      }
+      .featured__intro {
+        padding-bottom: clamp(12px, 3vw, 20px);
+      }
+      .featured__intro-body {
+        padding-top: clamp(20px, 4vw, 32px);
+      }
+      .featured__slider-col .featured__carousel-wrap {
+        padding: clamp(16px, 3vw, 28px) var(--page-pad);
+      }
+      .featured__slider-col .featured__dots-wrap {
+        padding: 0 var(--page-pad) clamp(28px, 5vw, 48px);
+      }
+      .featured__slide {
+        flex: 0 0 min(300px, 82vw);
+        width: min(300px, 82vw);
+        min-width: min(300px, 82vw);
+      }
+    }
+    /* Блок 4: партнёры — в духе блока «почему нас» */
+    .partners-quad {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      border-top: none;
+      background: #0a0a0a;
+      color: #fff;
+      padding: clamp(40px, 6vw, 72px) 0;
+      box-sizing: border-box;
+    }
+    .partners-quad__grid {
+      display: block;
+      max-width: none;
+      width: 100%;
+      margin: 0;
+      padding: 0 var(--page-pad);
+      box-sizing: border-box;
+    }
+    .partners-quad__col {
+      padding: clamp(22px, 3.5vw, 36px) 0;
+      min-height: 0;
+      box-sizing: border-box;
+      border-left: none;
+      background: #0a0a0a;
+    }
+    .partners-quad__col:first-child {
+      border-left: none;
+    }
+    .partners-quad__col--lead {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+    .partners-quad__label {
+      margin: 0;
+      font-size: clamp(1.12rem, 2.05vw, 1.48rem);
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      text-transform: lowercase;
+      color: #fff;
+      line-height: 1.38;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    .partners-quad__lead {
+      margin: clamp(28px, 5vw, 56px) 0 0;
+      font-size: clamp(1.08rem, 1.95vw, 1.42rem);
+      font-weight: 500;
+      line-height: 1.42;
+      color: #fff;
+      max-width: 30ch;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    /* Блок 5 — почему нас выбирают (сетка как на макете, Ч/Б) */
+    .why-us {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      background: #0a0a0a;
+      color: #fff;
+      border-top: none;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: clamp(48px, 8vw, 96px) 0 clamp(56px, 9vw, 104px);
+      box-sizing: border-box;
+      --why-us-gap: clamp(18px, 2.8vw, 26px);
+      --why-us-text-gap: clamp(12px, 2vw, 16px);
+    }
+    .why-us__wrap {
+      max-width: none;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 var(--page-pad);
+      box-sizing: border-box;
+    }
+    .why-us__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 2.35fr);
+      column-gap: clamp(24px, 3.5vw, 48px);
+      row-gap: var(--why-us-gap);
+      align-items: start;
+      position: relative;
+      z-index: 0;
+    }
+    .why-us__intro--bg {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: var(--why-us-text-gap);
+      min-height: 0;
+      padding-right: clamp(8px, 1.5vw, 16px);
+    }
+    @media (min-width: 1025px) {
+      .why-us__intro--bg {
+        position: sticky;
+        top: max(100px, 14vh);
+        align-self: start;
+        max-width: 38ch;
+      }
+    }
+    .why-us__intro--bg .why-us__label,
+    .why-us__intro--bg .why-us__lead {
+      text-shadow:
+        0 0 28px rgba(10, 10, 10, 0.95),
+        0 2px 20px rgba(0, 0, 0, 0.75),
+        0 0 1px rgba(0, 0, 0, 0.9);
+    }
+    .why-us__label {
+      margin: 0;
+      font-size: clamp(1.12rem, 2.05vw, 1.48rem);
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      text-transform: lowercase;
+      color: #fff;
+      line-height: 1.38;
+      text-shadow: none;
+    }
+    .why-us__num {
+      margin: 0;
+      padding-top: clamp(28px, 4.5vw, 52px);
+      font-size: clamp(1rem, 1.55vw, 1.22rem);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.42);
+      line-height: 1;
+    }
+    .why-us__intro-mid {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: flex-start;
+      padding: 0;
+      min-height: 0;
+    }
+    .why-us__lead {
+      margin: 0;
+      font-size: clamp(1.08rem, 1.95vw, 1.42rem);
+      font-weight: 500;
+      line-height: 1.42;
+      color: #fff;
+      max-width: 30ch;
+      text-shadow: none;
+    }
+    /* Карточки преимуществ — равномерные отступы */
+    .why-us__cascade {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--why-us-gap);
+      align-items: start;
+    }
+    .why-us__cascade .why-card--pos-1,
+    .why-us__cascade .why-card--pos-2,
+    .why-us__cascade .why-card--pos-3,
+    .why-us__cascade .why-card--pos-4,
+    .why-us__cascade .why-card--pos-5 {
+      grid-column: auto;
+      grid-row: auto;
+      margin: 0;
+    }
+    .why-card {
+      background: rgba(255, 255, 255, 0.06);
+      padding: clamp(20px, 3vw, 32px) clamp(18px, 2.6vw, 28px);
+      box-sizing: border-box;
+      box-shadow: none;
+      text-shadow: none;
+      filter: none;
+    }
+    .why-card h3 {
+      margin: 0 0 var(--why-us-text-gap);
+      font-size: clamp(1.05rem, 1.65vw, 1.28rem);
+      font-weight: 600;
+      line-height: 1.28;
+      color: #fff;
+      text-shadow: none;
+    }
+    .why-card p {
+      margin: 0;
+      font-size: clamp(0.92rem, 1.42vw, 1.05rem);
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.82);
+      max-width: none;
+      text-shadow: none;
+    }
+    @media (max-width: 1024px) {
+      .why-us {
+        --why-us-gap: clamp(16px, 4vw, 22px);
+        --why-us-text-gap: clamp(10px, 2.8vw, 14px);
+      }
+      .why-us__grid {
+        grid-template-columns: 1fr;
+        row-gap: var(--why-us-gap);
+      }
+      .why-us__intro--bg {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--why-us-text-gap);
+        padding-right: 0;
+        position: static;
+      }
+      .why-us__num {
+        flex: 1 1 100%;
+        padding-top: 0;
+      }
+      .why-us__intro-mid {
+        flex: 0 0 auto;
+        width: 100%;
+        padding: 0;
+        align-items: flex-start;
+      }
+      .why-us__lead {
+        max-width: none;
+      }
+      .why-us__cascade {
+        grid-template-columns: 1fr;
+        gap: var(--why-us-gap);
+      }
+    }
+    @media (max-width: 767px) {
+      :root {
+        --page-pad: var(--page-pad-mobile);
+      }
+      body {
+        font-size: 16px;
+      }
+      .wrap {
+        padding-left: var(--page-pad-mobile);
+        padding-right: var(--page-pad-mobile);
+      }
+      .about-volga-wrap {
+        padding-left: var(--page-pad-mobile);
+        padding-right: var(--page-pad-mobile);
+      }
+      .about-volga__slide {
+        padding-left: clamp(4px, 1vw, 8px);
+        padding-right: clamp(4px, 1vw, 8px);
+      }
+      .arch-block__overlay-inner {
+        padding-left: var(--page-pad-mobile);
+        padding-right: var(--page-pad-mobile);
+      }
+      .partners-quad__grid,
+      .why-us__wrap,
+      .contact-volga-wrap,
+      .featured__intro,
+      .featured__slider-col .featured__carousel-wrap,
+      .featured__slider-col .featured__dots-wrap {
+        padding-left: var(--page-pad-mobile);
+        padding-right: var(--page-pad-mobile);
+      }
+      .nav-panel {
+        padding-left: var(--page-pad-mobile);
+        padding-right: var(--page-pad-mobile);
+      }
+      .section {
+        padding: 56px 0;
+      }
+      .about-volga-section,
+      .contact-volga-section,
+      .partners-quad,
+      .why-us,
+      .featured {
+        padding-top: clamp(32px, 8vw, 48px);
+        padding-bottom: clamp(32px, 8vw, 48px);
+      }
+      .about-volga__head h2 {
+        font-size: clamp(1.05rem, 5.2vw, 1.35rem);
+        text-align: left;
+      }
+      .about-summary {
+        margin-top: 20px;
+        margin-left: 0;
+        margin-right: 0;
+        max-width: 100%;
+        padding-left: var(--page-pad-mobile);
+        padding-right: var(--page-pad-mobile);
+        font-size: clamp(1.05rem, 4.8vw, 1.35rem);
+        line-height: 1.4;
+        overflow-wrap: anywhere;
+      }
+      .partners-quad__lead,
+      .why-us__lead {
+        max-width: none;
+      }
+      .featured__slide {
+        flex: 0 0 min(260px, 86vw);
+        width: min(260px, 86vw);
+        min-width: min(260px, 86vw);
+      }
+      .featured__label,
+      .featured__quote {
+        max-width: none;
+        font-size: clamp(1rem, 4.2vw, 1.2rem);
+      }
+      .works-lightbox {
+        padding: 44px 8px 8px;
+      }
+      .works-lightbox__nav {
+        width: 40px;
+        height: 40px;
+      }
+      .works-lightbox__nav--prev {
+        left: 4px;
+      }
+      .works-lightbox__nav--next {
+        right: 4px;
+      }
+      .works-lightbox__img {
+        max-height: min(58vh, 520px);
+      }
+      .contact-volga__title {
+        max-width: none;
+        font-size: clamp(1.1rem, 5vw, 1.45rem);
+      }
+      .contact-volga__submit {
+        width: 100%;
+        align-self: stretch;
+        text-align: center;
+      }
+      .nav-panel a {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+        margin: 0 6px 6px 0;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <header class="header-scroll header" aria-hidden="true">
+    <div class="header-inner">
+      <a href="#" class="logo logo--mark" aria-label="Maxi Group">
+        <img class="logo__img" src="assets/logo.png" alt="" width="800" height="192" decoding="async">
+      </a>
+      <div class="header-scroll__right">
+        <nav class="header-scroll__links" aria-label="Быстрые ссылки">
+          <a class="nav-link" data-nav="showroom" data-showroom-link href="#" target="_blank" rel="noopener noreferrer">наш шоурум</a>
+          <a class="nav-link" data-nav="about" href="#about">о нас</a>
+          <a class="nav-link" data-nav="contacts" href="#lead">контакты</a>
+        </nav>
+        <a class="header-cta-link" href="#lead">[+] Получить расчёт проекта</a>
+        <button type="button" class="menu-toggle js-menu-toggle" aria-label="Меню" aria-expanded="false" aria-controls="navPanel">Меню</button>
+      </div>
+    </div>
+  </header>
+  <div class="nav-backdrop js-nav-backdrop" aria-hidden="true" tabindex="-1"></div>
+  <nav class="nav-panel" id="navPanel" aria-label="Разделы сайта" aria-hidden="true">
+    <div class="nav-panel__title">Разделы</div>
+    <a href="#about">О компании</a>
+    <a data-showroom-link href="#" target="_blank" rel="noopener noreferrer">Наш шоурум</a>
+    <a href="#about">О нас</a>
+    <a href="#directions">Направления</a>
+    <a href="#partners">Партнёры</a>
+    <a href="#why-us">Почему мы</a>
+    <a href="#featured-works">Лучшие проекты</a>
+    <a href="#lead">Расчёт проекта и контакты</a>
+  </nav>
+
+  <main>
+    <section class="hero-volga" aria-label="Главный экран">
+      <div class="hero-volga__bg" role="img" aria-label="Фон: фрагмент кирпичной кладки"></div>
+      <div class="hero-volga__inner">
+        <div class="hero-volga__top">
+          <a href="#" class="hero-brand hero-brand--mark" aria-label="Maxi Group">
+            <img class="hero-brand__img" src="assets/logo.png" alt="" width="3840" height="896" decoding="async">
+          </a>
+          <div class="hero-volga__curtain">
+            <div class="hero-volga__actions">
+              <a class="nav-link" data-nav="showroom" data-showroom-link href="#" target="_blank" rel="noopener noreferrer">наш шоурум</a>
+              <a class="nav-link" data-nav="about" href="#about">о нас</a>
+              <a class="nav-link" data-nav="contacts" href="#lead">контакты</a>
+              <button type="button" class="hero-volga__menu js-menu-toggle" aria-label="Меню" aria-expanded="false" aria-controls="navPanel">Меню</button>
+            </div>
+          </div>
+        </div>
+        <div class="hero-volga__middle">
+          <nav class="hero-volga__links" aria-label="Ключевые разделы">
+            <a data-showroom-link href="#" target="_blank" rel="noopener noreferrer">ПЕРЕЙТИ В ШОУРУМ [→]</a>
+          </nav>
+        </div>
+        <div class="hero-volga__tagline">
+          <p>Надёжный партнёр в частном строительстве: создаём современные дома и поставляем качественные материалы для вашего проекта</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-volga-section" id="about" aria-labelledby="about-heading">
+      <div class="about-volga-wrap">
+        <div class="about-volga-grid">
+          <div class="about-volga__rail">о компании</div>
+          <div class="about-volga__head">
+            <h2 id="about-heading">Проектируем, строим и комплектуем частные дома, поставляем строительные материалы и окна для вашего проекта.</h2>
+          </div>
+          <div class="about-volga__deck">
+            <div class="about-volga__scroll" id="aboutVolgaScroll" tabindex="0" role="region" aria-roledescription="карусель" aria-label="Показатели и информация о компании">
+              <article class="about-volga__slide">
+                <div class="about-volga__stat">
+                  <span class="about-volga__stat-val">10</span>
+                  <span class="about-volga__stat-sub">лет на рынке</span>
+                </div>
+                <p class="about-volga__slide-text">Менее чем за 10 лет завершили свыше 25 работ на более чем 10 объектах — накапливаем опыт и ответственность за каждый этап.</p>
+              </article>
+              <article class="about-volga__slide">
+                <div class="about-volga__stat">
+                  <span class="about-volga__stat-val">25+</span>
+                  <span class="about-volga__stat-sub">завершённых работ</span>
+                </div>
+                <p class="about-volga__slide-text">Дома из блоков, кирпича, газобетона, каркасные и другие технологии; бани, беседки, гаражи, благоустройство и подрядные работы.</p>
+              </article>
+              <article class="about-volga__slide">
+                <div class="about-volga__stat">
+                  <span class="about-volga__stat-val">10+</span>
+                  <span class="about-volga__stat-sub">объектов</span>
+                </div>
+                <p class="about-volga__slide-text">География проектов — Тула и Тульская область; готовы обсудить выезд, обмер и консультацию в офисе на Колетвинова, 9.</p>
+              </article>
+              <article class="about-volga__slide">
+                <div class="about-volga__stat">
+                  <span class="about-volga__stat-val about-volga__stat-val--text">Смета</span>
+                  <span class="about-volga__stat-sub">под задачу</span>
+                </div>
+                <p class="about-volga__slide-text">Итоговая смета зависит от площади, материалов и комплектации — подбираем решение под ваш бюджет без навязывания лишнего.</p>
+              </article>
+              <article class="about-volga__slide">
+                <div class="about-volga__stat">
+                  <span class="about-volga__stat-val about-volga__stat-val--text">площадь</span>
+                  <span class="about-volga__stat-sub">под ваш объект</span>
+                </div>
+                <p class="about-volga__slide-text">Работаем с объектами разной площади застройки: от компактных построек до крупных жилых и коммерческих зданий, административных и промышленных сооружений.</p>
+              </article>
+              <article class="about-volga__slide">
+                <div class="about-volga__stat">
+                  <span class="about-volga__stat-val">100%</span>
+                  <span class="about-volga__stat-sub">цикл работ</span>
+                </div>
+                <p class="about-volga__slide-text">Проектирование, подготовка участка, строительство, отделка, благоустройство, поставка материалов (дилер Braer, Poliplast, Технониколь, Bonolit) и сопровождение договора.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="about-summary">Сочетание современных технологий и многолетнего опыта для быстрого и долговечного результата</p>
+    </section>
+
+    <section class="arch-block" id="directions" aria-label="Для кого мы строим">
+      <div class="arch-block__shell" id="archBlockShell" data-arch-step="0">
+        <div class="arch-block__media" aria-hidden="true">
+          <div class="arch-block__media-inner">
+            <div class="arch-block__media-img arch-block__media-img--0"></div>
+            <div class="arch-block__media-img arch-block__media-img--1"></div>
+            <div class="arch-block__media-img arch-block__media-img--2"></div>
+          </div>
+        </div>
+        <div class="arch-block__col arch-block__col--text">
+          <div class="arch-block__scroll-track">
+            <div class="arch-block__spacers" role="presentation">
+              <div class="arch-block__sentinel" data-arch-step="0"></div>
+              <div class="arch-block__sentinel" data-arch-step="1"></div>
+              <div class="arch-block__sentinel" data-arch-step="2"></div>
+            </div>
+            <div class="arch-block__overlay">
+              <div class="arch-block__overlay-inner">
+                <h1 class="arch-block__h1">Наше партнерство начинается там, где ценят время и выбирают качество</h1>
+                <div class="arch-block__kicker-row">
+                  <span id="archBlockKicker">для кого мы строим</span>
+                  <span class="arch-block__kicker-line" aria-hidden="true"></span>
+                </div>
+                <div class="arch-block__panels" id="archPanels" aria-live="polite">
+                  <article class="arch-block__panel is-active" data-arch-step="0" data-kicker="для кого мы строим">
+                    <div class="arch-block__panel-main">
+                      <h2 class="arch-block__h2">Частное строительство</h2>
+                      <div class="arch-block__body">
+                        <p>Частный дом строится на трёх принципах: точные сроки, безупречное качество и прозрачные процессы.</p>
+                        <p>Мы знаем, как работать с индивидуальным проектом. Там, где важна каждая деталь, а комфорт семьи — на первом месте, мы гарантируем чёткий контроль, отсутствие брака и своевременные поставки.</p>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="arch-block__panel" data-arch-step="1" data-kicker="для кого мы строим">
+                    <div class="arch-block__panel-main">
+                      <h2 class="arch-block__h2">Типовое строительство</h2>
+                      <div class="arch-block__body">
+                        <p>Типовое строительство — это отлаженные процессы, скорость и экономичность.</p>
+                        <p>Мы работаем с готовыми решениями.</p>
+                        <p>Там, где важны оптимизация и соблюдение бюджета, вы получаете чёткую организацию, стабильное качество и своевременные поставки.</p>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="arch-block__panel" data-arch-step="2" data-kicker="мы поставляем">
+                    <div class="arch-block__panel-main">
+                      <h2 class="arch-block__h2">Поставка материалов</h2>
+                      <div class="arch-block__body">
+                        <p>Это ответственность за весь цикл строительства.</p>
+                        <p>Мы выступаем гарантом стабильности для вашего проекта.</p>
+                        <p>Там, где важна каждая деталь сметы, мы гарантируем оптимальные цены, логистику без сбоев и материалы, соответствующие стандартам.</p>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="partners-quad" id="partners" aria-labelledby="partners-label">
+      <div class="partners-quad__grid">
+        <div class="partners-quad__col partners-quad__col--lead">
+          <p class="partners-quad__label" id="partners-label">партнеры и клиенты</p>
+          <p class="partners-quad__lead">Мы гордимся сотрудничеством с производителями и результатами совместных проектов.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="why-us" id="why-us" aria-labelledby="why-us-heading">
+      <div class="why-us__wrap">
+        <div class="why-us__grid">
+          <div class="why-us__intro why-us__intro--bg">
+            <p class="why-us__label" id="why-us-heading">почему нас выбирают</p>
+            <div class="why-us__intro-mid">
+              <p class="why-us__lead">Прозрачный процесс — предсказуемый результат. Никаких скрытых платежей и сдвинутых сроков</p>
+            </div>
+          </div>
+          <div class="why-us__cascade" aria-label="Преимущества">
+            <article class="why-card why-card--pos-1">
+              <h3>Фиксированная смета</h3>
+              <p>Никаких неожиданных доплат. Цена, которую мы называем в договоре, не меняется в процессе стройки. Никаких непредвиденных обстоятельств и скрытых платежей.</p>
+            </article>
+            <article class="why-card why-card--pos-2">
+              <h3>Соблюдаем сроки</h3>
+              <p>Работаем без простоев. Материалы завозим заранее, субподрядчики проверенные, процессы отлажены. То, что обещали на бумаге, сдаем вовремя.</p>
+            </article>
+            <article class="why-card why-card--pos-3">
+              <h3>Официальный договор и поэтапная приемка работ</h3>
+              <p>Вы не платите за воздух. Деньги делите на этапы, подписываете акты выполненных работ. Юридическая чистота и ваша безопасность.</p>
+            </article>
+            <article class="why-card why-card--pos-4">
+              <h3>Собственный склад материалов</h3>
+              <p>Мы не бегаем по рынкам в последний момент. Материалы и окна завозим на объект заранее по оптовым ценам — вы не переплачиваете розничным магазинам.</p>
+            </article>
+            <article class="why-card why-card--pos-5">
+              <h3>Один подрядчик — полный цикл</h3>
+              <p>Вам не нужно искать отдельно строителей, отдельно замерщика для окон, отдельно монтажников. Проект, материалы, окна, строительство и отделка — все в одних руках. Вы получаете комплексную гарантию и одного ответственного за всё.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-full" id="build">
+      <h2>Что мы строим</h2>
+      <p class="muted" style="max-width: 52ch; margin-bottom: 24px;">От проекта до чистовой отделки — основные направления с примерами объектов.</p>
+      <div class="build-grid">
+        <article class="build-card"><div class="build-card__media"><img src="assets/build-bloki.png" alt="Дом из блоков" loading="lazy" width="800" height="600"></div><h3>Дома из блоков</h3></article>
+        <article class="build-card"><div class="build-card__media"><img src="assets/build-brus.png" alt="Дом из бруса" loading="lazy" width="800" height="600"></div><h3>Дома из бруса</h3></article>
+        <article class="build-card"><div class="build-card__media"><img src="assets/build-breven.png" alt="Дом из брёвен" loading="lazy" width="800" height="600"></div><h3>Дома из брёвен</h3></article>
+        <article class="build-card"><div class="build-card__media"><img src="assets/build-kirpich.png" alt="Кирпичный дом" loading="lazy" width="800" height="600"></div><h3>Дома из кирпича</h3></article>
+        <article class="build-card"><div class="build-card__media"><img src="assets/build-karkas.png" alt="Каркасный дом" loading="lazy" width="800" height="600"></div><h3>Каркасные дома</h3></article>
+        <article class="build-card"><div class="build-card__media"><img src="assets/build-lafet.png" alt="Дом из лафета" loading="lazy" width="800" height="600"></div><h3>Дома из лафета</h3></article>
+        <article class="build-card"><div class="build-card__media"><img src="assets/build-bani.png" alt="Баня" loading="lazy" width="800" height="600"></div><h3>Бани</h3></article>
+        <article class="build-card"><div class="build-card__media"><img src="assets/build-besedki.png" alt="Беседка" loading="lazy" width="800" height="600"></div><h3>Беседки</h3></article>
+        <article class="build-card"><div class="build-card__media"><img src="assets/build-garagi.png" alt="Гараж" loading="lazy" width="800" height="600"></div><h3>Гаражи</h3></article>
+        <article class="build-card"><div class="build-card__media"><img src="assets/build-gazobeton.png" alt="Дом из газобетона" loading="lazy" width="800" height="600"></div><h3>Дома из газобетона</h3></article>
+        <article class="build-card"><div class="build-card__media"><img src="assets/build-sip.png" alt="Дом из SIP-панелей" loading="lazy" width="800" height="600"></div><h3>Дома из SIP-панелей</h3></article>
+        <article class="build-card"><div class="build-card__media"><img src="assets/build-lstk.png" alt="Дом из ЛСТК" loading="lazy" width="800" height="600"></div><h3>Дома из ЛСТК</h3></article>
+      </div>
+    </section>
+
+    <section class="section-full" id="blago">
+      <h2>Осуществляем все виды работ по благоустройству</h2>
+      <div class="blago-layout">
+        <div class="blago-layout__visual">
+          <img src="assets/blago-hero.png" alt="Благоустройство: озеленение, дорожки, малые архитектурные формы" width="900" height="675" loading="lazy">
+        </div>
+        <div class="blago-layout__content">
+          <div class="blago-services">
+            <div class="blago-service-item">
+              <span class="blago-service-item__star" aria-hidden="true">✦</span>
+              <span class="blago-service-item__text">Планировка участка</span>
+            </div>
+            <div class="blago-service-item">
+              <span class="blago-service-item__star" aria-hidden="true">✦</span>
+              <span class="blago-service-item__text">Озеленение территории</span>
+            </div>
+            <div class="blago-service-item">
+              <span class="blago-service-item__star" aria-hidden="true">✦</span>
+              <span class="blago-service-item__text">Монтаж малых архитектурных элементов в дворовом пространстве</span>
+            </div>
+            <div class="blago-service-item">
+              <span class="blago-service-item__star" aria-hidden="true">✦</span>
+              <span class="blago-service-item__text">Строительство и сборка всех предусмотренных конструкций и объектов</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-full" id="objects-type">
+      <h2>Строительство, реконструкция, ремонт и обустройство</h2>
+      <p class="muted" style="margin-bottom: 16px; max-width: 60ch;">Также занимаемся объектами: административные, общественные, промышленные; торговые и тепличные комплексы, бизнес-центры, диагностические и спортивные центры, парковки, производственные помещения, коммерческие объекты и др.</p>
+      <div class="objects-type-grid">
+        <div class="objects-type-card">
+          <div class="objects-type-card__icon"><img src="assets/object-admin.png" alt="" width="120" height="120" loading="lazy"></div>
+          <h3>Административные</h3>
+        </div>
+        <div class="objects-type-card">
+          <div class="objects-type-card__icon"><img src="assets/object-public.png" alt="" width="120" height="120" loading="lazy"></div>
+          <h3>Общественные</h3>
+        </div>
+        <div class="objects-type-card">
+          <div class="objects-type-card__icon"><img src="assets/object-industrial.png" alt="" width="120" height="120" loading="lazy"></div>
+          <h3>Промышленные</h3>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-full" id="process">
+      <h2>Как мы работаем</h2>
+      <div class="process-grid">
+        <article class="process-card">
+          <div class="process-card__num">01</div>
+          <h3>Обращение в компанию</h3>
+          <p>Для успешной реализации проекта в первую очередь важна коммуникация. Менеджеры на связи и открыты для обсуждения потребностей в удобном формате.</p>
+        </article>
+        <article class="process-card">
+          <div class="process-card__num">02</div>
+          <h3>Выбор проекта</h3>
+          <p>Качественный дизайн-проект — залог успеха стройки. Можно предоставить свой проект или выбрать из готовых; при необходимости — консультация в офисе и индивидуальный проект.</p>
+        </article>
+        <article class="process-card">
+          <div class="process-card__num">03</div>
+          <h3>Детальная смета</h3>
+          <p>Подсчёт технических затрат: проживание на объекте, электроэнергия и вода, питание сотрудников и др. Предварительная сумма озвучивается заказчику.</p>
+        </article>
+        <article class="process-card">
+          <div class="process-card__num">04</div>
+          <h3>Выезд на объект</h3>
+          <p>Осмотр, сбор информации для коммерческого предложения с учётом сложностей. При необходимости — геология и топосъёмка.</p>
+        </article>
+        <article class="process-card">
+          <div class="process-card__num">05</div>
+          <h3>Окончательная смета</h3>
+          <p>На основе детальной сметы — финальная смета, календарный график, договор, утверждение генплана.</p>
+        </article>
+        <article class="process-card">
+          <div class="process-card__num">06</div>
+          <h3>Передача объекта</h3>
+          <p>Передача по акту, заезд на объект для начала работ.</p>
+        </article>
+        <article class="process-card">
+          <div class="process-card__num">07</div>
+          <h3>Этапная оплата</h3>
+          <p>Поэтапное авансирование и промежуточная приёмка работ.</p>
+        </article>
+        <article class="process-card">
+          <div class="process-card__num">08</div>
+          <h3>Сдача объекта</h3>
+          <p>Завершение строительных работ, вывоз; заказчик получает объект, готовый к заселению.</p>
+        </article>
+        <article class="process-card">
+          <div class="process-card__num">09</div>
+          <h3>Рекомендации по эксплуатации</h3>
+          <p>Специалисты подскажут, как ухаживать за объектом долгие годы.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-full" id="services">
+      <h2>Готовы взять на себя подряд и предлагаем услуги</h2>
+      <div class="services-orbit">
+        <div class="services-orbit__label services-orbit__label--tl"><span class="services-orbit__star" aria-hidden="true">✦</span> Отделочные работы</div>
+        <div class="services-orbit__label services-orbit__label--tr"><span class="services-orbit__star" aria-hidden="true">✦</span> Остекление</div>
+        <div class="services-orbit__hub">
+          <span class="services-orbit__ring-outer" aria-hidden="true"></span>
+          <span class="services-orbit__ring-inner" aria-hidden="true"></span>
+          <div class="services-orbit__img-wrap">
+            <img src="assets/fotPodr.png" alt="Объекты строительства" width="540" height="540" loading="lazy">
+          </div>
+        </div>
+        <div class="services-orbit__label services-orbit__label--bl"><span class="services-orbit__star" aria-hidden="true">✦</span> Каменщиков</div>
+        <div class="services-orbit__label services-orbit__label--br"><span class="services-orbit__star" aria-hidden="true">✦</span> Инженерные работы</div>
+      </div>
+    </section>
+
+    <section class="section-full" id="supply">
+      <h2>Комплексная поставка строительных материалов</h2>
+      <p class="muted" style="margin-bottom: 18px;">Официальный дилер ряда заводов ЦФО. Партнёры и поставщики:</p>
+      <div class="supply-logos">
+        <div class="supply-logo-card"><img src="assets/supply-1-bonolit.png" width="200" height="60" alt="Bonolit" loading="lazy"></div>
+        <div class="supply-logo-card"><img src="assets/supply-2-technonicol.png" width="260" height="60" alt="Технониколь" loading="lazy"></div>
+        <div class="supply-logo-card"><img src="assets/supply-3-polyplast.png" width="260" height="60" alt="Полипласт" loading="lazy"></div>
+        <div class="supply-logo-card"><img src="assets/supply-4-braer.png" width="260" height="60" alt="Braer Группа" loading="lazy"></div>
+      </div>
+    </section>
+
+    <section class="section-full" id="why">
+      <h2>Почему строить с нами выгодно</h2>
+      <p class="muted" style="margin-bottom: 16px; max-width: 65ch;">Самое важное из того, что мы строим каждый день, — наша репутация. Обещаем то, что можем; делаем больше, чем обещаем. Уделяем внимание запросам заказчиков — результаты превзойдут ожидания.</p>
+      <div class="features">
+        <div class="feature">
+          <span class="feature-num">01</span>
+          <div>
+            <h3>Бесплатный проект</h3>
+            <p>При заключении договора на строительство — проект объекта в подарок.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="feature-num">02</span>
+          <div>
+            <h3>Индивидуальный подход</h3>
+            <p>Помогает сэкономить и получить качественный результат.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="feature-num">03</span>
+          <div>
+            <h3>Специалисты своего дела</h3>
+            <p>Большой опыт, постоянный рост компетенций — решим сложные задачи по проекту.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="feature-num">04</span>
+          <div>
+            <h3>Высокие стандарты</h3>
+            <p>Качество и договорные обязательства — надёжный партнёр для клиентов.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-full" id="works">
+      <h2>Реализованные объекты</h2>
+      <p class="muted" style="max-width: 52ch; margin-bottom: 24px;">Реализованные проекты — нажмите карточку, чтобы просмотреть все фотографии объекта.</p>
+      <div id="worksMount" class="works-mount" aria-live="polite"></div>
+    </section>
+
+    <section class="section-full" id="reviews">
+      <h2>Отзывы наших клиентов</h2>
+      <div class="reviews-carousel">
+        <div class="reviews-track" id="reviewsTrack" tabindex="0" role="region" aria-roledescription="карусель" aria-label="Отзывы клиентов">
+          <div class="reviews-slide">
+            <blockquote class="review">
+              <div class="review__head">
+                <span class="review__avatar" aria-hidden="true">А</span>
+                <div class="review__body">
+                  <p class="review__text">Строили дом из газобетона — сроки выдержали, бригада на объекте всегда на связи. Смета не «разъехалась», мелочи по отделке поправили без споров. Рекомендую как надёжного подрядчика.</p>
+                  <footer class="review-meta">Андрей Смирнов · 14.02.25</footer>
+                </div>
+              </div>
+            </blockquote>
+          </div>
+          <div class="reviews-slide">
+            <blockquote class="review">
+              <div class="review__head">
+                <span class="review__avatar" aria-hidden="true">Е</span>
+                <div class="review__body">
+                  <p class="review__text">Заказывали благоустройство и навес — работа аккуратная, территорию убрали после себя. Понравилось, что заранее обсудили все узлы и закрепили в договоре. Если понадобится второй этап — обратимся снова.</p>
+                  <footer class="review-meta">Елена Воронова · 03.01.25</footer>
+                </div>
+              </div>
+            </blockquote>
+          </div>
+          <div class="reviews-slide">
+            <blockquote class="review">
+              <div class="review__head">
+                <span class="review__avatar" aria-hidden="true">Д</span>
+                <div class="review__body">
+                  <p class="review__text">Брали компанию по рекомендации соседей. Кирпичный дом сдали без сюрпризов по коммуникациям, акты подписывали поэтапно. Персонал вежливый, претензии по качеству решали оперативно.</p>
+                  <footer class="review-meta">Дмитрий Козлов · 22.11.24</footer>
+                </div>
+              </div>
+            </blockquote>
+          </div>
+          <div class="reviews-slide">
+            <blockquote class="review">
+              <div class="review__head">
+                <span class="review__avatar" aria-hidden="true">О</span>
+                <div class="review__body">
+                  <p class="review__text">Нужны были отделочные работы и остекление — сделали в оговорённые сроки, без навязывания лишних опций. Документы и гарантии выдали в полном объёме. В целом спокойный, предсказуемый опыт.</p>
+                  <footer class="review-meta">Ольга Михайлова · 08.10.24</footer>
+                </div>
+              </div>
+            </blockquote>
+          </div>
+        </div>
+        <div class="reviews-dots" aria-label="Навигация по отзывам">
+          <button type="button" class="reviews-dot" aria-label="Отзыв 1" aria-current="true"></button>
+          <button type="button" class="reviews-dot" aria-label="Отзыв 2"></button>
+          <button type="button" class="reviews-dot" aria-label="Отзыв 3"></button>
+          <button type="button" class="reviews-dot" aria-label="Отзыв 4"></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="featured" id="featured-works" aria-labelledby="featured-label">
+      <div class="featured__row">
+        <div class="featured__intro">
+          <p class="featured__label" id="featured-label">лучшие проекты</p>
+          <div class="featured__intro-body">
+            <p class="featured__quote">Мы строим не просто дома. Мы строим историю, которой делимся</p>
+          </div>
+        </div>
+        <div class="featured__slider-col">
+          <div class="featured__carousel-wrap">
+            <div class="featured__viewport" id="featuredViewport">
+              <div class="featured__track" id="featuredTrack"></div>
+            </div>
+          </div>
+          <div class="featured__dots-wrap">
+            <div class="featured__dots" id="featuredDots" role="tablist" aria-label="Слайды проектов"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-volga-section" id="lead">
+      <div class="contact-volga-wrap">
+        <div class="contact-volga-grid">
+          <div class="contact-volga__info" id="contacts">
+            <p class="contact-volga__tag">контакты</p>
+            <h2 class="contact-volga__title">Ваш дом начинается с грамотного проекта</h2>
+            <div class="contact-volga__icon" aria-hidden="true">☎</div>
+            <p class="contact-volga__line"><a href="tel:+79101619641">+7 (910) 161-96-41</a></p>
+            <p class="contact-volga__line"><a href="mailto:info@maxigroup.pro">info@maxigroup.pro</a></p>
+            <p class="contact-volga__sub">г. Тула, Колетвинова 9 · пн–пт с 9:00 до 18:00</p>
+          </div>
+          <div class="contact-volga__form-wrap">
+            <p class="contact-volga__showroom">Выберите готовый проект и материалы в нашем <a data-showroom-link href="#" target="_blank" rel="noopener noreferrer">шоуруме</a></p>
+            <p class="contact-volga__form-hint">или оставьте заявку на расчёт вашего проекта</p>
+            <form class="contact-volga__form" action="#" method="post" onsubmit="event.preventDefault(); alert('Подключите обработчик формы (PHP, почта, CRM).');">
+              <input id="leadName" name="name" type="text" required autocomplete="name" placeholder="ФИО">
+              <input id="leadPhone" name="phone" type="tel" required autocomplete="tel" placeholder="Телефон">
+              <input id="leadEmail" name="email" type="email" required autocomplete="email" placeholder="Электронная почта">
+              <label class="contact-volga__chk" for="agree">
+                <input id="agree" type="checkbox" required>
+                <span>Соглашаюсь с <a href="#">политикой конфиденциальности</a></span>
+              </label>
+              <button type="submit" class="contact-volga__submit">Отправить заявку</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="worksLightbox" class="works-lightbox" hidden aria-modal="true" role="dialog" aria-label="Галерея проекта">
+    <button type="button" class="works-lightbox__close" aria-label="Закрыть">×</button>
+    <button type="button" class="works-lightbox__nav works-lightbox__nav--prev" aria-label="Предыдущее фото">‹</button>
+    <button type="button" class="works-lightbox__nav works-lightbox__nav--next" aria-label="Следующее фото">›</button>
+    <div class="works-lightbox__stage">
+      <img class="works-lightbox__img" src="" alt="">
+    </div>
+    <p class="works-lightbox__caption"></p>
+    <div class="works-lightbox__thumbs"></div>
+  </div>
+
+  <!-- Встроенный список работ: работает при открытии HTML с диска (file://). Обновляйте через regenerate-works.ps1 -->
+  <script>window.__ASSET_PREFIX = "assets/";</script>
+  <script src="assets/works-manifest.js" charset="utf-8"></script>
+
+  <script>
+    (function () {
+      function applyAssetPrefix(prefix) {
+        if (!prefix || prefix === "assets/") return;
+        document.querySelectorAll('img[src^="assets/"]').forEach(function (img) {
+          img.src = prefix + img.getAttribute("src").slice(7);
+        });
+        var hero = document.querySelector(".hero-volga__bg");
+        if (hero) {
+          hero.style.backgroundImage = "url(\"" + prefix + "oblozka.png\")";
+        }
+      }
+
+      function withAssetPrefix(rel) {
+        var prefix = window.__ASSET_PREFIX || "assets/";
+        if (!rel) return "";
+        if (prefix !== "assets/" && rel.indexOf("assets/") === 0) {
+          return prefix + rel.slice(7);
+        }
+        return rel;
+      }
+
+      function encodeAssetSrc(raw) {
+        var path = withAssetPrefix(String(raw || ""));
+        if (!path) return "";
+        var prefix = window.__ASSET_PREFIX || "assets/";
+        var body = path.indexOf(prefix) === 0 ? path.slice(prefix.length) : path;
+        return (
+          prefix +
+          body
+            .split("/")
+            .filter(Boolean)
+            .map(function (seg) {
+              try {
+                return encodeURIComponent(decodeURIComponent(seg));
+              } catch (e) {
+                return encodeURIComponent(seg);
+              }
+            })
+            .join("/")
+        );
+      }
+
+      function flipImageExt(src) {
+        var m = String(src || "").match(/(\.[Jj][Pp][Gg]|[Jj][Pp][Ee][Gg])$/);
+        if (!m) return "";
+        var ext = m[1];
+        var alt =
+          ext === ext.toLowerCase()
+            ? ext.toUpperCase()
+            : ext.charAt(0).toUpperCase() + ext.slice(1).toLowerCase();
+        return src.slice(0, -ext.length) + alt;
+      }
+
+      function primeAssetImages() {
+        document.querySelectorAll('img[src*="assets/"]').forEach(function (img) {
+          var raw = img.getAttribute("src") || "";
+          if (!raw || raw.indexOf("assets/") !== 0) return;
+          var enc = encodeAssetSrc(raw);
+          if (enc && enc !== raw) img.src = enc;
+        });
+        var heroBg = document.querySelector(".hero-volga__bg");
+        if (heroBg) {
+          heroBg.style.backgroundImage =
+            'url("' + encodeAssetSrc("assets/oblozka.png") + '")';
+        }
+      }
+
+      function setupImageFallbacks() {
+        document.addEventListener(
+          "error",
+          function (e) {
+            var img = e.target;
+            if (!img || img.tagName !== "IMG") return;
+            var src = img.getAttribute("src") || "";
+            if (src.indexOf("assets") === -1 && src.indexOf("%") === -1) return;
+            var step = Number(img.dataset.assetFallbackStep || "0");
+            if (step >= 2) return;
+            img.dataset.assetFallbackStep = String(step + 1);
+            if (step === 0) {
+              var enc = encodeAssetSrc(src);
+              if (enc && enc !== src) {
+                img.src = enc;
+                return;
+              }
+            }
+            var alt = flipImageExt(src);
+            if (alt && alt !== src) img.src = alt;
+          },
+          true
+        );
+      }
+
+      window.encodeAssetSrc = encodeAssetSrc;
+      applyAssetPrefix(window.__ASSET_PREFIX || "assets/");
+      primeAssetImages();
+      setupImageFallbacks();
+
+      var panel = document.getElementById("navPanel");
+      var toggles = document.querySelectorAll(".js-menu-toggle");
+      var backdrop = document.querySelector(".js-nav-backdrop");
+      function navOpen() {
+        return document.body.classList.contains("nav-panel-open");
+      }
+      function setNavOpen(open) {
+        document.body.classList.toggle("nav-panel-open", open);
+        if (panel) panel.setAttribute("aria-hidden", open ? "false" : "true");
+        toggles.forEach(function (btn) {
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+      }
+      toggles.forEach(function (toggle) {
+        toggle.addEventListener("click", function () {
+          setNavOpen(!navOpen());
+        });
+      });
+      if (panel) {
+        panel.querySelectorAll("a").forEach(function (a) {
+          a.addEventListener("click", function () { setNavOpen(false); });
+        });
+      }
+      if (backdrop) {
+        backdrop.addEventListener("click", function () { setNavOpen(false); });
+      }
+      document.addEventListener("keydown", function (e) {
+        if (e.key !== "Escape") return;
+        var wlb = document.getElementById("worksLightbox");
+        if (wlb && !wlb.hidden) return;
+        setNavOpen(false);
+      });
+      function onScroll() {
+        var past = window.scrollY > window.innerHeight * 0.72;
+        document.body.classList.toggle("is-past-hero", past);
+        var hs = document.querySelector(".header-scroll");
+        if (hs) hs.setAttribute("aria-hidden", past ? "false" : "true");
+      }
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+
+      function navKeyFromScroll() {
+        var vh = window.innerHeight || document.documentElement.clientHeight || 1;
+        var band = vh * 0.28;
+        var lead = document.getElementById("lead");
+        if (lead) {
+          var rl = lead.getBoundingClientRect();
+          if (rl.top < vh * 0.62 && rl.bottom > 72) return "contacts";
+        }
+        var about = document.getElementById("about");
+        if (about) {
+          var ra = about.getBoundingClientRect();
+          if (ra.top < band + vh * 0.12 && ra.bottom > 72) return "about";
+        }
+        return "";
+      }
+
+      function navKeyFromHash() {
+        var h = (location.hash || "").replace(/^#/, "");
+        if (h === "about") return "about";
+        if (h === "lead" || h === "contacts") return "contacts";
+        return "";
+      }
+
+      function syncNavActive() {
+        if (document.documentElement.getAttribute("data-route") !== "main") return;
+        var key = navKeyFromScroll() || navKeyFromHash();
+        document.querySelectorAll(".nav-link[data-nav]").forEach(function (a) {
+          var k = a.getAttribute("data-nav");
+          a.classList.toggle("is-active", !!(key && k === key));
+        });
+      }
+
+      syncNavActive();
+      window.addEventListener("scroll", syncNavActive, { passive: true });
+      window.addEventListener("resize", syncNavActive, { passive: true });
+      window.addEventListener("hashchange", syncNavActive);
+    })();
+
+    (function () {
+      var o = window.__SHOWROOM_ORIGIN;
+      var links = document.querySelectorAll("a[data-showroom-link]");
+      var placeholder = "https://showroom.example.com";
+      if (o && String(o) !== placeholder) {
+        var base = String(o).replace(/\/$/, "");
+        links.forEach(function (a) {
+          a.href = base;
+        });
+      } else {
+        links.forEach(function (a) {
+          a.href = "showroom.html";
+          a.removeAttribute("target");
+          a.removeAttribute("rel");
+        });
+      }
+    })();
+
+    (function () {
+      var sc = document.getElementById("aboutVolgaScroll");
+      if (!sc) return;
+      var section = document.getElementById("about");
+      var slides = Array.prototype.slice.call(sc.querySelectorAll(".about-volga__slide"));
+      var totalSlides = slides.length;
+      var maxSeen = 0;
+      var unlocked = totalSlides <= 1;
+      var wheelLocked = false;
+      function slideH() {
+        return sc.clientHeight || 1;
+      }
+      function currentSlideIndex() {
+        var h = slideH();
+        if (!h) return 0;
+        return Math.max(0, Math.min(totalSlides - 1, Math.round(sc.scrollTop / h)));
+      }
+      function markSeen() {
+        var idx = currentSlideIndex();
+        if (idx > maxSeen) maxSeen = idx;
+        if (maxSeen >= totalSlides - 1) unlocked = true;
+      }
+      function shouldLockPage() {
+        if (unlocked || !section) return false;
+        var r = section.getBoundingClientRect();
+        var vh = window.innerHeight || document.documentElement.clientHeight || 1;
+        var visible = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
+        return visible / vh >= 0.45;
+      }
+      sc.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowDown" || e.key === "PageDown") {
+          e.preventDefault();
+          sc.scrollBy({ top: slideH(), behavior: "smooth" });
+        } else if (e.key === "ArrowUp" || e.key === "PageUp") {
+          e.preventDefault();
+          sc.scrollBy({ top: -slideH(), behavior: "smooth" });
+        }
+      });
+      sc.addEventListener("scroll", markSeen, { passive: true });
+      markSeen();
+
+      window.addEventListener(
+        "wheel",
+        function (e) {
+          if (!shouldLockPage()) return;
+          var direction = e.deltaY > 0 ? 1 : e.deltaY < 0 ? -1 : 0;
+          if (!direction) return;
+          if (e.deltaY > 0) {
+            e.preventDefault();
+          } else if (e.deltaY < 0 && sc.scrollTop > 1) {
+            e.preventDefault();
+          } else {
+            return;
+          }
+          if (wheelLocked) return;
+          wheelLocked = true;
+          var step = Math.max(120, Math.round(slideH() * 0.72));
+          sc.scrollBy({ top: direction * step, behavior: "smooth" });
+          window.setTimeout(function () {
+            wheelLocked = false;
+            markSeen();
+          }, 280);
+        },
+        { passive: false }
+      );
+    })();
+
+    (function () {
+      var shell = document.getElementById("archBlockShell");
+      if (!shell) return;
+      var sentinels = shell.querySelectorAll(".arch-block__sentinel");
+      var panels = shell.querySelectorAll(".arch-block__panel");
+      var kicker = document.getElementById("archBlockKicker");
+      if (!sentinels.length || !panels.length) return;
+      var active = 0;
+      function setActive(i) {
+        i = Math.max(0, Math.min(panels.length - 1, i));
+        if (i === active) return;
+        active = i;
+        shell.setAttribute("data-arch-step", String(i));
+        panels.forEach(function (p, j) {
+          p.classList.toggle("is-active", j === i);
+        });
+        if (kicker) {
+          var kp = panels[i] && panels[i].getAttribute("data-kicker");
+          if (kp) kicker.textContent = kp;
+        }
+      }
+      function clamp(v, a, b) {
+        return Math.max(a, Math.min(b, v));
+      }
+      var mediaInner = shell.querySelector(".arch-block__media-inner");
+      function syncByScroll() {
+        var rect = shell.getBoundingClientRect();
+        var vh = window.innerHeight || document.documentElement.clientHeight || 1;
+        var scrollable = Math.max(1, rect.height - vh);
+        var passed = clamp(-rect.top, 0, scrollable);
+        var progress = passed / scrollable;
+        shell.style.setProperty("--arch-progress", progress * 100 + "%");
+        if (mediaInner) {
+          mediaInner.style.transform = "translateY(" + -progress * (200 / 3) + "%)";
+        }
+        var step = 0;
+        if (progress >= 0.66) step = 2;
+        else if (progress >= 0.33) step = 1;
+        setActive(step);
+      }
+      var ticking = false;
+      function onWinScroll() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function () {
+          ticking = false;
+          syncByScroll();
+        });
+      }
+      window.addEventListener("scroll", onWinScroll, { passive: true });
+      window.addEventListener("resize", onWinScroll, { passive: true });
+      shell.setAttribute("data-arch-step", "0");
+      shell.style.setProperty("--arch-progress", "0%");
+      if (mediaInner) mediaInner.style.transform = "translateY(0)";
+      panels.forEach(function (p, j) {
+        p.classList.toggle("is-active", j === 0);
+      });
+      if (kicker) kicker.textContent = panels[0].getAttribute("data-kicker") || kicker.textContent;
+      syncByScroll();
+    })();
+
+    (function () {
+      var track = document.getElementById("featuredTrack");
+      var dotsWrap = document.getElementById("featuredDots");
+      var viewport = document.getElementById("featuredViewport");
+      if (!track || !dotsWrap || !viewport) return;
+
+      function withAssetPrefix(rel) {
+        var prefix = window.__ASSET_PREFIX || "assets/";
+        if (prefix !== "assets/" && rel.indexOf("assets/") === 0) {
+          return prefix + rel.slice(7);
+        }
+        return rel;
+      }
+      function encodePath(rel) {
+        return window.encodeAssetSrc
+          ? window.encodeAssetSrc(withAssetPrefix(rel))
+          : withAssetPrefix(rel);
+      }
+      function openFeaturedGallery(proj, projIndex) {
+        if (!proj || !proj.images || !proj.images.length) return;
+        if (typeof window.__openWorksGalleryByIndex === "function" && Number.isFinite(projIndex)) {
+          window.__openWorksGalleryByIndex(projIndex);
+        }
+      }
+
+      var manifest = window.__WORKS_MANIFEST;
+      var featuredProjects = [];
+      if (manifest && manifest.projects && manifest.projects.length) {
+        featuredProjects = manifest.projects.slice();
+        track.innerHTML = "";
+        featuredProjects.forEach(function (proj, idx) {
+          var src = proj.images && proj.images[0];
+          if (!src) return;
+          var slide = document.createElement("div");
+          slide.className = "featured__slide";
+          slide.setAttribute("tabindex", "0");
+          slide.setAttribute("role", "button");
+          slide.setAttribute("aria-label", "Открыть галерею: " + (proj.folder || "Проект"));
+          slide.dataset.projIndex = String(idx);
+          var img = document.createElement("img");
+          img.src = encodePath(src);
+          img.alt = proj.folder || "Объект";
+          img.loading = "lazy";
+          var cap = document.createElement("div");
+          cap.className = "featured__caption";
+          var strong = document.createElement("strong");
+          strong.textContent = proj.folder || "Проект";
+          cap.appendChild(strong);
+          slide.appendChild(img);
+          slide.appendChild(cap);
+          track.appendChild(slide);
+        });
+      }
+      var slides = track.querySelectorAll(".featured__slide");
+      var n = slides.length;
+      if (!n) return;
+
+      function slideStepPx() {
+        var s0 = slides[0];
+        if (!s0) return viewport.clientWidth || 1;
+        var g = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
+        return s0.getBoundingClientRect().width + g;
+      }
+      function maxScrollLeft() {
+        return Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+      }
+      function syncDotsFromScroll() {
+        var step = slideStepPx();
+        if (step <= 0) return;
+        var sl = viewport.scrollLeft;
+        var dotIdx = Math.round(sl / step);
+        var maxSl = maxScrollLeft();
+        if (maxSl > 0 && sl >= maxSl - 2) dotIdx = n - 1;
+        dotIdx = Math.max(0, Math.min(n - 1, dotIdx));
+        dotsWrap.querySelectorAll(".featured__dot").forEach(function (d, k) {
+          d.setAttribute("aria-current", k === dotIdx ? "true" : "false");
+        });
+      }
+      function goToSlideIndex(j) {
+        j = Math.max(0, Math.min(n - 1, j));
+        var step = slideStepPx();
+        var left = Math.min(j * step, maxScrollLeft());
+        viewport.scrollTo({ left: left, behavior: "smooth" });
+      }
+      dotsWrap.innerHTML = "";
+      for (var k = 0; k < n; k++) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "featured__dot";
+        b.setAttribute("aria-label", "Слайд " + (k + 1));
+        b.setAttribute("aria-current", k === 0 ? "true" : "false");
+        (function (kj) {
+          b.addEventListener("click", function () {
+            goToSlideIndex(kj);
+          });
+        })(k);
+        dotsWrap.appendChild(b);
+      }
+      syncDotsFromScroll();
+      viewport.addEventListener("scroll", syncDotsFromScroll, { passive: true });
+      window.addEventListener(
+        "resize",
+        function () {
+          syncDotsFromScroll();
+        },
+        { passive: true }
+      );
+
+      if (featuredProjects.length) {
+        track.addEventListener("click", function (e) {
+          var slide = e.target.closest(".featured__slide");
+          if (!slide) return;
+          var i = Number(slide.dataset.projIndex);
+          if (i >= 0 && featuredProjects[i]) openFeaturedGallery(featuredProjects[i], i);
+        });
+        track.addEventListener("keydown", function (e) {
+          var slide = e.target.closest(".featured__slide");
+          if (!slide) return;
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            var j = Number(slide.dataset.projIndex);
+            if (j >= 0 && featuredProjects[j]) openFeaturedGallery(featuredProjects[j], j);
+          }
+        });
+      }
+    })();
+
+    (function () {
+      var track = document.getElementById("reviewsTrack");
+      var dots = document.querySelectorAll(".reviews-dot");
+      if (!track || !dots.length) return;
+      function slideW() {
+        return track.clientWidth || 1;
+      }
+      function syncReviewDots() {
+        var w = slideW();
+        var i = Math.round(track.scrollLeft / w);
+        i = Math.max(0, Math.min(i, dots.length - 1));
+        dots.forEach(function (d, j) {
+          d.setAttribute("aria-current", j === i ? "true" : "false");
+        });
+      }
+      track.addEventListener("scroll", syncReviewDots, { passive: true });
+      window.addEventListener("resize", syncReviewDots);
+      dots.forEach(function (d, j) {
+        d.addEventListener("click", function () {
+          track.scrollTo({ left: j * slideW(), behavior: "smooth" });
+        });
+      });
+      track.addEventListener("keydown", function (e) {
+        var w = slideW();
+        if (e.key === "ArrowRight") {
+          e.preventDefault();
+          track.scrollBy({ left: w, behavior: "smooth" });
+        } else if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          track.scrollBy({ left: -w, behavior: "smooth" });
+        }
+      });
+      syncReviewDots();
+    })();
+
+    (function () {
+      var mount = document.getElementById("worksMount");
+      var lb = document.getElementById("worksLightbox");
+      if (!mount || !lb) return;
+
+      function withAssetPrefix(rel) {
+        var prefix = window.__ASSET_PREFIX || "assets/";
+        if (prefix !== "assets/" && rel.indexOf("assets/") === 0) {
+          return prefix + rel.slice(7);
+        }
+        return rel;
+      }
+
+      function encodePath(rel) {
+        return window.encodeAssetSrc
+          ? window.encodeAssetSrc(withAssetPrefix(rel))
+          : withAssetPrefix(rel);
+      }
+
+      var imgEl = lb.querySelector(".works-lightbox__img");
+      var capEl = lb.querySelector(".works-lightbox__caption");
+      var thumbsEl = lb.querySelector(".works-lightbox__thumbs");
+      var closeBtn = lb.querySelector(".works-lightbox__close");
+      var prevBtn = lb.querySelector(".works-lightbox__nav--prev");
+      var nextBtn = lb.querySelector(".works-lightbox__nav--next");
+
+      var state = { projects: [], idx: 0, photo: 0, urls: [] };
+
+      function openLb() {
+        lb.hidden = false;
+        document.body.style.overflow = "hidden";
+      }
+      function closeLb() {
+        lb.hidden = true;
+        document.body.style.overflow = "";
+      }
+
+      function showPhoto() {
+        var u = state.urls[state.photo];
+        if (!u) return;
+        imgEl.src = u;
+        var folder = state.projects[state.idx] && state.projects[state.idx].folder ? state.projects[state.idx].folder : "";
+        imgEl.alt = folder ? folder + ", фото " + (state.photo + 1) : "";
+        capEl.textContent = (state.photo + 1) + " / " + state.urls.length;
+        thumbsEl.querySelectorAll(".works-lightbox__thumb").forEach(function (t, i) {
+          t.setAttribute("aria-current", i === state.photo ? "true" : "false");
+        });
+      }
+
+      function openGallery(projIndex) {
+        var p = state.projects[projIndex];
+        if (!p || !p.images || !p.images.length) return;
+        state.idx = projIndex;
+        state.urls = p.images.map(encodePath);
+        state.photo = 0;
+        thumbsEl.innerHTML = "";
+        state.urls.forEach(function (src, i) {
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "works-lightbox__thumb";
+          b.setAttribute("aria-label", "Фото " + (i + 1));
+          var im = document.createElement("img");
+          im.src = src;
+          im.alt = "";
+          im.loading = "lazy";
+          b.appendChild(im);
+          b.addEventListener("click", function () {
+            state.photo = i;
+            showPhoto();
+          });
+          thumbsEl.appendChild(b);
+        });
+        showPhoto();
+        openLb();
+      }
+      window.__openWorksGalleryByIndex = openGallery;
+
+      closeBtn.addEventListener("click", closeLb);
+      prevBtn.addEventListener("click", function () {
+        if (!state.urls.length) return;
+        state.photo = (state.photo - 1 + state.urls.length) % state.urls.length;
+        showPhoto();
+      });
+      nextBtn.addEventListener("click", function () {
+        if (!state.urls.length) return;
+        state.photo = (state.photo + 1) % state.urls.length;
+        showPhoto();
+      });
+      document.addEventListener("keydown", function (e) {
+        if (lb.hidden) return;
+        if (e.key === "Escape") {
+          e.preventDefault();
+          closeLb();
+        } else if (e.key === "ArrowLeft" && state.urls.length) {
+          e.preventDefault();
+          state.photo = (state.photo - 1 + state.urls.length) % state.urls.length;
+          showPhoto();
+        } else if (e.key === "ArrowRight" && state.urls.length) {
+          e.preventDefault();
+          state.photo = (state.photo + 1) % state.urls.length;
+          showPhoto();
+        }
+      });
+
+      function initWorks(data) {
+        state.projects = data.projects || [];
+        if (!state.projects.length) {
+          mount.innerHTML = "<p class=\"works-error\">Нет проектов в портфолио.</p>";
+          return;
+        }
+        var grid = document.createElement("div");
+        grid.className = "build-grid";
+        state.projects.forEach(function (p, i) {
+          var art = document.createElement("article");
+          art.className = "build-card build-card--works";
+          art.setAttribute("tabindex", "0");
+          art.setAttribute("role", "button");
+          art.setAttribute("aria-label", "Открыть галерею: " + p.folder);
+          var media = document.createElement("div");
+          media.className = "build-card__media";
+          var img = document.createElement("img");
+          var first = p.images && p.images[0] ? encodePath(p.images[0]) : "";
+          img.src = first;
+          img.alt = p.folder;
+          img.loading = "lazy";
+          img.width = 800;
+          img.height = 600;
+          media.appendChild(img);
+          var h3 = document.createElement("h3");
+          h3.textContent = p.folder;
+          art.appendChild(media);
+          art.appendChild(h3);
+          function openThis() {
+            openGallery(i);
+          }
+          art.addEventListener("click", openThis);
+          art.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              openThis();
+            }
+          });
+          grid.appendChild(art);
+        });
+        mount.appendChild(grid);
+      }
+
+      if (window.__WORKS_MANIFEST && window.__WORKS_MANIFEST.projects) {
+        initWorks(window.__WORKS_MANIFEST);
+      } else {
+        fetch("assets/works-manifest.json")
+          .then(function (r) {
+            if (!r.ok) throw new Error("bad status");
+            return r.json();
+          })
+          .then(function (data) {
+            initWorks(data);
+          })
+          .catch(function () {
+            mount.innerHTML = "<p class=\"works-error\">Нет данных о работах: подключите файл assets/works-manifest.js (запустите в папке сайта скрипт regenerate-works.ps1) или положите works-manifest.json в папку assets рядом с этой страницей.</p>";
+          });
+      }
+    })();
+
+  </script>
+</body>
+</html>

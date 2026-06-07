@@ -1,0 +1,1145 @@
+<!doctype html>
+<html lang="ru" data-route="showroom">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Основной сайт на другом домене: замените на боевые URL -->
+  <script>
+    window.__MAIN_SITE_ORIGIN = "https://maxigroup.example.com";
+    window.__MAIN_SITE_PATH = "/maxigroup-volga-style.html";
+  </script>
+  <title>Maxi Group — Шоурум</title>
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --surface: #0d0d0d;
+      --text: #fff;
+      --muted: rgba(255, 255, 255, 0.72);
+      --border: rgba(255, 255, 255, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(13, 13, 13, 0.98);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .topbar .logo {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .topbar .logo.logo--mark {
+      display: flex;
+      align-items: center;
+      line-height: 0;
+      text-decoration: none;
+      white-space: normal;
+    }
+    .topbar .logo__img {
+      display: block;
+      height: clamp(56px, 12vw, 88px);
+      width: auto;
+      max-width: min(360px, 72vw);
+      object-fit: contain;
+      object-position: left center;
+    }
+    .topbar-nav {
+      display: flex;
+      align-items: center;
+      gap: clamp(18px, 2.8vw, 34px);
+      margin-left: auto;
+    }
+    .topbar a {
+      color: #fff;
+      text-decoration: none;
+      font-size: clamp(1rem, 1.65vw, 1.12rem);
+      text-transform: lowercase;
+    }
+    .nav-link.is-active {
+      text-decoration: underline;
+      text-underline-offset: 0.35rem;
+      text-decoration-thickness: 1px;
+      text-decoration-color: rgba(255, 255, 255, 0.88);
+    }
+    .topbar .menu-lite {
+      border: none;
+      background: transparent;
+      color: #fff;
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .topbar-nav {
+      position: relative;
+    }
+    .topbar-nav.is-collapsed:not(.is-open) a.nav-link {
+      display: none;
+    }
+    .showroom-menu-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 19;
+      display: none;
+    }
+    .showroom-menu-panel {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      z-index: 20;
+      transform: translateY(-100%);
+      opacity: 0;
+      visibility: hidden;
+      transition: transform 0.25s ease, opacity 0.25s ease, visibility 0.25s ease;
+      background: rgba(13, 13, 13, 0.98);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 16px;
+    }
+    .showroom-menu-panel a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      line-height: 1.35;
+      text-transform: lowercase;
+      white-space: nowrap;
+    }
+    body.showroom-menu-open .showroom-menu-backdrop {
+      display: block;
+    }
+    body.showroom-menu-open .showroom-menu-panel {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 16px 46px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(1.5rem, 3.8vw, 2.3rem);
+    }
+    .modal-lead {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .tab {
+      border: 1px solid var(--border);
+      background: transparent;
+      color: #fff;
+      border-radius: 999px;
+      padding: 10px 14px;
+      cursor: pointer;
+    }
+    .tab[aria-selected="true"] { background: rgba(255,255,255,0.12); }
+    .panel[hidden] { display: none !important; }
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .filters--construction {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .filters input, .filters select {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: #fff;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 0.92rem;
+    }
+    .styles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .chip {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: transparent;
+      color: #fff;
+      padding: 7px 11px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .chip[aria-pressed="true"] { background: rgba(255,255,255,0.12); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .card {
+      border: none;
+      background: var(--surface);
+      cursor: pointer;
+    }
+    .card img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+    }
+    .card-body { padding: 10px 12px 12px; }
+    .card h3 { margin: 0 0 8px; font-size: 0.95rem; }
+    .meta { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--muted); }
+    .empty { border: 1px dashed var(--border); color: var(--muted); padding: 22px; text-align: center; }
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+    }
+    .modal[hidden] { display: none !important; }
+    .modal-inner {
+      width: min(980px, 100%);
+      max-height: 92vh;
+      overflow: auto;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 14px;
+    }
+    .modal-close {
+      float: right;
+      border: none;
+      background: transparent;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .modal-gallery { display: grid; gap: 10px; }
+    .modal-gallery img { width: 100%; border: none; }
+    .modal-viewer {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 12px 0 0;
+    }
+    .modal-viewer__stage {
+      flex: 1;
+      min-width: 0;
+      background: var(--bg);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: min(62vh, 520px);
+      max-height: min(62vh, 520px);
+      height: min(62vh, 520px);
+      overflow: hidden;
+    }
+    /* Полный кадр без обрезки (как в исходном файле) */
+    .modal-viewer__stage img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      object-position: center center;
+      display: block;
+    }
+    .modal-nav {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      font-size: 1.75rem;
+      line-height: 1;
+      cursor: pointer;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+    .modal-nav:hover { background: rgba(255, 255, 255, 0.12); }
+    .modal-nav:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.65);
+      outline-offset: 2px;
+    }
+    .modal-nav[hidden] {
+      display: none !important;
+    }
+    .modal-slide-meta {
+      margin: 10px 0 0;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .modal-slide-caption {
+      margin: 8px 0 0;
+      font-size: 0.95rem;
+      line-height: 1.45;
+      color: rgba(255, 255, 255, 0.92);
+    }
+    .modal-description {
+      margin: 14px 0 0;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+    .modal-gallery--contain img {
+      width: 100%;
+      max-height: min(58vh, 520px);
+      object-fit: contain;
+      object-position: center;
+      background: transparent;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    #panel-materials .card {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #panel-materials .card img {
+      width: 100%;
+      height: clamp(176px, 24vw, 236px);
+      object-fit: contain;
+      object-position: center;
+      background: transparent;
+      padding: 0;
+      box-sizing: border-box;
+      aspect-ratio: auto;
+    }
+    #panel-materials .card--brick-collage .card__collage {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      height: auto;
+      background: #000;
+      flex-shrink: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #panel-materials .card--brick-collage .card__collage img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      object-position: center;
+      padding: 0;
+      background: transparent;
+      aspect-ratio: auto;
+      display: block;
+    }
+    /* «Коммерция и объекты» — как второй скрин: чёрный верх, круг по центру, серый подвал с текстом */
+    #constructionGrid .card--object-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      background: #000;
+      overflow: hidden;
+      border: none;
+    }
+    #constructionGrid .card--object-icon .card__media {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: clamp(14px, 2.8vw, 24px) clamp(12px, 2.4vw, 20px);
+      background: #000;
+      min-height: clamp(132px, 18vw, 168px);
+    }
+    #constructionGrid .card--object-icon .card__media img {
+      width: clamp(84px, 16vw, 112px);
+      height: clamp(84px, 16vw, 112px);
+      min-width: 0;
+      border-radius: 50%;
+      object-fit: contain;
+      object-position: center;
+      padding: 0;
+      box-sizing: border-box;
+      background: radial-gradient(circle at 32% 30%, #4f8dff 0%, #2f6feb 38%, #1d4ed8 72%, #163fb8 100%);
+      box-shadow: none;
+      aspect-ratio: 1;
+    }
+    #constructionGrid .card--object-icon .card-body {
+      padding: 10px 12px 12px;
+    }
+    #constructionGrid .card--object-icon .card-body h3 {
+      font-size: 0.92rem;
+      line-height: 1.25;
+    }
+    #constructionGrid .card--object-icon .card__type {
+      font-size: 0.76rem;
+      line-height: 1.3;
+    }
+    #constructionGrid .card--object-icon .card-body {
+      background: var(--bg);
+      margin: 0;
+      padding: 14px 16px 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    #constructionGrid .card--object-icon .card-body h3 {
+      margin: 0 0 6px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.28;
+    }
+    #constructionGrid .card--object-icon .card__type {
+      margin: 0;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.4;
+    }
+    #constructionGrid .card--object-icon .meta {
+      display: none;
+    }
+    @media (max-width: 980px) {
+      .grid, .filters { grid-template-columns: 1fr 1fr; }
+      .topbar-nav.is-collapsed:not(.is-open) a.nav-link {
+        display: none;
+      }
+      .topbar-nav {
+        margin-left: auto;
+        flex: 0 0 auto;
+      }
+    }
+    @media (max-width: 640px) {
+      .grid, .filters { grid-template-columns: 1fr; }
+      .filters--construction {
+        grid-template-columns: 1fr;
+      }
+      .wrap {
+        padding: 20px 14px 36px;
+      }
+      h1 {
+        font-size: clamp(1.35rem, 6vw, 1.75rem);
+      }
+      .tabs {
+        gap: 8px;
+      }
+      .tab {
+        flex: 1 1 calc(50% - 8px);
+        min-width: 0;
+        padding: 9px 10px;
+        font-size: 0.82rem;
+        text-align: center;
+      }
+      .topbar {
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap;
+        padding: 10px 14px;
+        gap: 10px;
+      }
+      .topbar .logo {
+        flex: 1 1 auto;
+        min-width: 0;
+        max-width: calc(100% - 52px);
+      }
+      .topbar .logo__img {
+        height: clamp(48px, 14vw, 64px);
+        max-width: min(240px, 72vw);
+      }
+      .topbar-nav {
+        flex: 0 0 auto;
+        margin-left: 0;
+        width: auto;
+      }
+      .topbar .menu-lite {
+        margin-left: 0;
+        font-size: 1.35rem;
+        min-width: 44px;
+        min-height: 44px;
+      }
+      .modal {
+        padding: 8px;
+      }
+      .modal-inner {
+        padding: 12px;
+        max-height: 96vh;
+      }
+      .modal-viewer {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .modal-viewer__stage {
+        width: 100%;
+        min-height: min(48vh, 360px);
+        max-height: min(52vh, 400px);
+        height: auto;
+      }
+      .modal-nav {
+        width: 100%;
+        height: 40px;
+        border-radius: 8px;
+      }
+      .modal-nav[hidden] {
+        display: none !important;
+      }
+      .card-body h3 {
+        font-size: 0.88rem;
+      }
+      .styles {
+        gap: 6px;
+      }
+      .chip {
+        font-size: 0.75rem;
+        padding: 6px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="#" class="logo logo--mark" data-main-site="" aria-label="Maxi Group">
+      <img class="logo__img" src="assets/logo.png" alt="" width="720" height="176" decoding="async">
+    </a>
+    <nav class="topbar-nav" aria-label="Навигация">
+      <a class="nav-link is-active" data-nav="showroom" href="#" aria-current="page">наш шоурум</a>
+      <a class="nav-link" data-nav="about" href="#" data-main-site="#about">о нас</a>
+      <a class="nav-link" data-nav="contacts" href="#" data-main-site="#lead">контакты</a>
+      <button type="button" class="menu-lite" aria-label="Меню" aria-expanded="false">☰</button>
+    </nav>
+  </header>
+  <div class="showroom-menu-backdrop" id="showroomMenuBackdrop" hidden></div>
+  <nav class="showroom-menu-panel" id="showroomMenuPanel" aria-label="Меню шоурума" hidden>
+    <a href="#" aria-current="page">наш шоурум</a>
+    <a data-main-site="#about" href="#">о нас</a>
+    <a data-main-site="#directions" href="#">направления</a>
+    <a data-main-site="#partners" href="#">партнёры</a>
+    <a data-main-site="#why-us" href="#">почему мы</a>
+    <a data-main-site="#featured-works" href="#">лучшие проекты</a>
+    <a data-main-site="#lead" href="#">расчёт проекта и контакты</a>
+  </nav>
+  <main class="wrap">
+    <h1>Наш шоурум</h1>
+
+    <div class="tabs" role="tablist">
+      <button class="tab" type="button" aria-selected="true" data-panel="construction">Строительство</button>
+      <button class="tab" type="button" aria-selected="false" data-panel="materials">Материалы</button>
+      <button class="tab" type="button" aria-selected="false" data-panel="windows">Окна и двери</button>
+    </div>
+
+    <section class="panel" id="panel-construction" data-anchor="construction">
+      <div class="styles" id="styles"></div>
+      <div class="filters filters--construction">
+        <input id="fArea" type="number" placeholder="Площадь от, м²">
+        <input id="fPrice" type="number" placeholder="Цена до, ₽">
+        <select id="fStyle"><option value="">Все типы</option></select>
+        <select id="fMaterial"><option value="">Все материалы</option></select>
+      </div>
+      <div class="grid" id="constructionGrid"></div>
+    </section>
+
+    <section class="panel" id="panel-materials" hidden data-anchor="materials">
+      <div class="filters">
+        <select id="mType"><option value="">Все типы материала</option></select>
+        <input id="mPrice" type="number" placeholder="Цена до, ₽">
+        <select id="mBrand"><option value="">Все производители</option></select>
+      </div>
+      <div class="grid" id="materialsGrid"></div>
+    </section>
+
+    <section class="panel" id="panel-windows" hidden>
+      <div class="empty">Раздел «Окна и двери» в процессе наполнения.</div>
+    </section>
+  </main>
+
+  <div class="modal" id="modal" hidden>
+    <div class="modal-inner">
+      <button class="modal-close" type="button" id="closeModal">×</button>
+      <h3 id="modalTitle"></h3>
+      <p id="modalLead" class="modal-lead"></p>
+      <div class="modal-viewer" id="modalViewer" hidden>
+        <button type="button" class="modal-nav modal-nav--prev" id="modalPrev" aria-label="Предыдущее фото">‹</button>
+        <div class="modal-viewer__stage">
+          <img id="modalSlideImg" src="" alt="">
+        </div>
+        <button type="button" class="modal-nav modal-nav--next" id="modalNext" aria-label="Следующее фото">›</button>
+      </div>
+      <p class="modal-slide-meta" id="modalSlideMeta" hidden aria-live="polite"></p>
+      <p class="modal-slide-caption" id="modalSlideCaption" hidden></p>
+      <p class="modal-description" id="modalDescription" hidden></p>
+      <div class="modal-gallery" id="modalGallery"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var o = window.__MAIN_SITE_ORIGIN;
+      var path = window.__MAIN_SITE_PATH || "/maxigroup-volga-style.html";
+      var placeholder = "https://maxigroup.example.com";
+      var links = document.querySelectorAll("a[data-main-site]");
+      if (o && String(o) !== placeholder) {
+        var base = String(o).replace(/\/$/, "") + path;
+        links.forEach(function (a) {
+          a.href = base + (a.getAttribute("data-main-site") || "");
+        });
+      } else {
+        links.forEach(function (a) {
+          a.href = "maxigroup-volga-style.html" + (a.getAttribute("data-main-site") || "");
+        });
+      }
+    })();
+
+    (function () {
+      var nav = document.querySelector(".topbar-nav");
+      if (!nav) return;
+      var btn = nav.querySelector(".menu-lite");
+      if (!btn) return;
+      var links = nav.querySelectorAll("a.nav-link");
+      var panel = document.getElementById("showroomMenuPanel");
+      var backdrop = document.getElementById("showroomMenuBackdrop");
+      var panelLinks = panel ? panel.querySelectorAll("a") : [];
+      var mq = window.matchMedia("(max-width: 980px)");
+      function setPanelOpen(open) {
+        document.body.classList.toggle("showroom-menu-open", open);
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+        if (panel) panel.hidden = !open;
+        if (backdrop) backdrop.hidden = !open;
+      }
+      function syncMenuMode() {
+        var collapsed = mq.matches;
+        nav.classList.toggle("is-collapsed", collapsed);
+        nav.classList.remove("is-open");
+        setPanelOpen(false);
+      }
+      btn.addEventListener("click", function () {
+        setPanelOpen(!document.body.classList.contains("showroom-menu-open"));
+      });
+      links.forEach(function (a) {
+        a.addEventListener("click", function () {
+          setPanelOpen(false);
+        });
+      });
+      if (backdrop) {
+        backdrop.addEventListener("click", function () {
+          setPanelOpen(false);
+        });
+      }
+      panelLinks.forEach(function (a) {
+        a.addEventListener("click", function () {
+          setPanelOpen(false);
+        });
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") setPanelOpen(false);
+      });
+      if (typeof mq.addEventListener === "function") {
+        mq.addEventListener("change", syncMenuMode);
+      } else if (typeof mq.addListener === "function") {
+        mq.addListener(syncMenuMode);
+      }
+      syncMenuMode();
+    })();
+
+    (function () {
+      window.__ASSET_PREFIX = "assets/";
+      function escHtml(s) {
+        return String(s || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+      }
+      function escAttr(s) {
+        return String(s || "")
+          .replace(/&/g, "&amp;")
+          .replace(/"/g, "&quot;")
+          .replace(/</g, "&lt;");
+      }
+      function withAssetPrefix(rel) {
+        var prefix = window.__ASSET_PREFIX || "assets/";
+        if (!rel) return "";
+        if (prefix !== "assets/" && rel.indexOf("assets/") === 0) {
+          return prefix + rel.slice(7);
+        }
+        return rel;
+      }
+      function encodePath(rel) {
+        var path = withAssetPrefix(String(rel || ""));
+        if (!path) return "";
+        var prefix = window.__ASSET_PREFIX || "assets/";
+        var body = path.indexOf(prefix) === 0 ? path.slice(prefix.length) : path;
+        return (
+          prefix +
+          body
+            .split("/")
+            .filter(Boolean)
+            .map(function (seg) {
+              try {
+                return encodeURIComponent(decodeURIComponent(seg));
+              } catch (err) {
+                return encodeURIComponent(seg);
+              }
+            })
+            .join("/")
+        );
+      }
+      function flipImageExt(src) {
+        var m = String(src || "").match(/(\.[Jj][Pp][Gg]|[Jj][Pp][Ee][Gg])$/);
+        if (!m) return "";
+        var ext = m[1];
+        var alt =
+          ext === ext.toLowerCase()
+            ? ext.toUpperCase()
+            : ext.charAt(0).toUpperCase() + ext.slice(1).toLowerCase();
+        return src.slice(0, -ext.length) + alt;
+      }
+      document.querySelectorAll('img[src*="assets/"]').forEach(function (img) {
+        var raw = img.getAttribute("src") || "";
+        if (!raw || raw.indexOf("assets/") !== 0) return;
+        var enc = encodePath(raw);
+        if (enc && enc !== raw) img.src = enc;
+      });
+      document.addEventListener(
+        "error",
+        function (e) {
+          var t = e.target;
+          if (!t || t.tagName !== "IMG") return;
+          var src = t.getAttribute("src") || "";
+          if (src.indexOf("assets") === -1 && src.indexOf("%") === -1) return;
+          var step = Number(t.dataset.assetFallbackStep || "0");
+          if (step >= 2) return;
+          t.dataset.assetFallbackStep = String(step + 1);
+          if (step === 0) {
+            var enc = encodePath(src);
+            if (enc && enc !== src) {
+              t.src = enc;
+              return;
+            }
+          }
+          var alt = flipImageExt(src);
+          if (alt && alt !== src) t.src = alt;
+        },
+        true
+      );
+      function mediaProject(p) {
+        var o = {};
+        Object.keys(p).forEach(function (k) {
+          o[k] = p[k];
+        });
+        if (typeof o.areaValue !== "number") o.areaValue = 0;
+        function normalizeMaterialPath(src) {
+          if (!src) return src;
+          if (src.indexOf("assets/кирпич/") === 0) {
+            return "assets/материалы 1/" + src.slice("assets/кирпич/".length);
+          }
+          return src;
+        }
+        o.cover = o.cover ? encodePath(normalizeMaterialPath(o.cover)) : "";
+        o.gallery = (o.gallery || []).map(function (g) {
+          return encodePath(normalizeMaterialPath(g));
+        });
+        return o;
+      }
+      function mapCatalogRow(r) {
+        return {
+          id: r.id,
+          title: r.title,
+          type: r.type,
+          material: inferMaterial(r.title),
+          brand: r.brand,
+          priceValue: r.priceValue,
+          price: r.price,
+          layout: "brickCollage",
+          usePhotoGallery: true,
+          areaValue: 0,
+          cover: encodePath(r.paths[0]),
+          gallery: [encodePath(r.paths[0])],
+        };
+      }
+      function inferMaterial(title) {
+        var t = String(title || "").toLowerCase();
+        if (t.indexOf("кирпич") !== -1) return "Кирпич";
+        if (t.indexOf("брус") !== -1) return "Брус";
+        if (t.indexOf("брёв") !== -1 || t.indexOf("брев") !== -1) return "Бревно";
+        if (t.indexOf("газобетон") !== -1) return "Газобетон";
+        if (t.indexOf("sip") !== -1) return "SIP-панели";
+        if (t.indexOf("лстк") !== -1) return "ЛСТК";
+        if (t.indexOf("лафет") !== -1) return "Лафет";
+        if (t.indexOf("блок") !== -1) return "Блоки";
+        return "Смешанные материалы";
+      }
+
+      var modal = document.getElementById("modal");
+      var modalTitle = document.getElementById("modalTitle");
+      var modalLead = document.getElementById("modalLead");
+      var modalGallery = document.getElementById("modalGallery");
+      var modalViewer = document.getElementById("modalViewer");
+      var modalSlideImg = document.getElementById("modalSlideImg");
+      var modalSlideMeta = document.getElementById("modalSlideMeta");
+      var modalSlideCaption = document.getElementById("modalSlideCaption");
+      var modalDescription = document.getElementById("modalDescription");
+      var modalPrev = document.getElementById("modalPrev");
+      var modalNext = document.getElementById("modalNext");
+      var slideState = { item: null, idx: 0 };
+
+      function closeModal() {
+        modal.hidden = true;
+        document.body.style.overflow = "";
+        slideState.item = null;
+        slideState.idx = 0;
+        modalViewer.hidden = true;
+        modalSlideMeta.hidden = true;
+        modalSlideCaption.hidden = true;
+        modalDescription.hidden = true;
+        modalPrev.hidden = true;
+        modalNext.hidden = true;
+        modalSlideImg.src = "";
+        modalSlideImg.alt = "";
+        modalGallery.hidden = false;
+        modalGallery.innerHTML = "";
+        var inner = modal.querySelector(".modal-inner");
+        if (inner) inner.scrollTop = 0;
+      }
+      document.getElementById("closeModal").addEventListener("click", closeModal);
+      document.addEventListener("keydown", function (e) {
+        if (modal.hidden) return;
+        if (e.key === "Escape") {
+          e.preventDefault();
+          closeModal();
+          return;
+        }
+        if (!slideState.item || !slideState.item.gallery || slideState.item.gallery.length < 2) return;
+        var gn = slideState.item.gallery.length;
+        if (e.key === "ArrowLeft") {
+          if (slideState.idx <= 0) return;
+          e.preventDefault();
+          showModalSlide(slideState.idx - 1);
+        } else if (e.key === "ArrowRight") {
+          if (slideState.idx >= gn - 1) return;
+          e.preventDefault();
+          showModalSlide(slideState.idx + 1);
+        }
+      });
+
+      function showModalSlide(i) {
+        var item = slideState.item;
+        if (!item || !item.gallery || !item.gallery.length) return;
+        var n = item.gallery.length;
+        slideState.idx = Math.max(0, Math.min(n - 1, i));
+        var src = item.gallery[slideState.idx];
+        modalSlideImg.src = src;
+        modalSlideImg.alt = (item.title || "Фото") + ", " + (slideState.idx + 1) + " из " + n;
+        modalSlideMeta.textContent = "Фото " + (slideState.idx + 1) + " из " + n;
+        modalSlideMeta.hidden = false;
+        var caps = item.slideCaptions || [];
+        var cap = caps[slideState.idx];
+        if (cap) {
+          modalSlideCaption.textContent = cap;
+          modalSlideCaption.hidden = false;
+        } else {
+          modalSlideCaption.textContent = "";
+          modalSlideCaption.hidden = true;
+        }
+        modalPrev.hidden = slideState.idx <= 0;
+        modalNext.hidden = slideState.idx >= n - 1;
+      }
+
+      function open(item) {
+        if (!item) return;
+        // Жесткий сброс перед открытием новой карточки,
+        // чтобы данные от предыдущей не подмешивались.
+        slideState.item = null;
+        slideState.idx = 0;
+        modalViewer.hidden = true;
+        modalGallery.hidden = true;
+        modalGallery.className = "modal-gallery";
+        modalGallery.innerHTML = "";
+        modalSlideMeta.hidden = true;
+        modalSlideCaption.hidden = true;
+        modalDescription.hidden = true;
+        modalPrev.hidden = true;
+        modalNext.hidden = true;
+        modalSlideImg.src = "";
+        modalSlideImg.alt = "";
+
+        modalTitle.textContent = item.title;
+        var leadParts = [];
+        if (item.style) leadParts.push(item.style);
+        if (item.area || item.type) leadParts.push(item.area || item.type);
+        if (item.price) leadParts.push(item.price);
+        if (item.brand) leadParts.push(item.brand);
+        modalLead.textContent = leadParts.join(" · ");
+        var g = Array.isArray(item.gallery) ? item.gallery.slice() : [];
+        var useSlideshow = item.usePhotoGallery === true && g.length >= 1;
+        if (useSlideshow) {
+          slideState.item = item;
+          modalViewer.hidden = false;
+          modalGallery.hidden = true;
+          modalGallery.innerHTML = "";
+          modalGallery.className = "modal-gallery";
+          if (item.description) {
+            modalDescription.textContent = item.description;
+            modalDescription.hidden = false;
+          } else {
+            modalDescription.textContent = "";
+            modalDescription.hidden = true;
+          }
+          showModalSlide(0);
+        } else {
+          slideState.item = null;
+          modalViewer.hidden = true;
+          modalSlideMeta.hidden = true;
+          modalSlideCaption.hidden = true;
+          modalDescription.hidden = true;
+          modalGallery.hidden = false;
+          if (g.length > 1) g = [g[0]];
+          modalGallery.className =
+            "modal-gallery" + (item.brand && !item.usePhotoGallery ? " modal-gallery--contain" : "");
+          modalGallery.innerHTML = g.map(function (imgSrc) {
+            return '<img src="' + escAttr(imgSrc) + '" alt="">';
+          }).join("");
+        }
+        modal.hidden = false;
+        document.body.style.overflow = "hidden";
+        var innerEl = modal.querySelector(".modal-inner");
+        if (innerEl) innerEl.scrollTop = 0;
+      }
+
+      modalPrev.addEventListener("click", function () {
+        showModalSlide(slideState.idx - 1);
+      });
+      modalNext.addEventListener("click", function () {
+        showModalSlide(slideState.idx + 1);
+      });
+
+      function card(item, which) {
+        if ((which === "materials" || which === "construction") && item.layout === "brickCollage" && item.gallery && item.gallery.length) {
+          var hero = escAttr(item.gallery[0]);
+          return (
+            '<article class="card card--brick-collage" tabindex="0" role="button" data-id="' +
+            escAttr(item.id) +
+            '"><div class="card__collage"><img src="' +
+            hero +
+            '" alt="" loading="lazy"></div><div class="card-body"><h3>' +
+            escHtml(item.title) +
+            '</h3><div class="meta"><span>' +
+            escHtml(item.type || "") +
+            '</span><span>' +
+            escHtml(item.price || "") +
+            "</span></div></div></article>"
+          );
+        }
+        return (
+          '<article class="card" tabindex="0" role="button" data-id="' +
+          escAttr(item.id) +
+          '">' +
+          '<img src="' +
+          escAttr(item.cover) +
+          '" alt="">' +
+          '<div class="card-body"><h3>' +
+          escHtml(item.title) +
+          '</h3><div class="meta"><span>' +
+          escHtml(item.area || item.type || "") +
+          '</span><span>' +
+          escHtml(item.price || "") +
+          "</span></div></div></article>"
+        );
+      }
+
+      var materialsBase = [
+        {
+          id: "m1",
+          title: "Кирпич облицовочный Braer",
+          type: "Кирпич",
+          brand: "Braer",
+          priceValue: 34,
+          price: "34 ₽ / шт",
+          layout: "brickCollage",
+          usePhotoGallery: true,
+          cover: "assets/материалы 1/1.jpg",
+          gallery: [
+            "assets/материалы 1/1.jpg",
+            "assets/материалы 1/2.jpg",
+            "assets/материалы 1/3.jpg",
+            "assets/материалы 1/4.jpg",
+          ],
+        },
+        { id: "m2", title: "Газобетон Bonolit D500", type: "Блоки", brand: "Bonolit", priceValue: 6900, price: "6 900 ₽ / м³", usePhotoGallery: true, cover: "assets/supply-1-bonolit.png", gallery: ["assets/supply-1-bonolit.png"] },
+        { id: "m3", title: "Смесь Polyplast M300", type: "Смесь", brand: "Полипласт", priceValue: 420, price: "420 ₽ / мешок", usePhotoGallery: true, cover: "assets/supply-3-polyplast.png", gallery: ["assets/supply-3-polyplast.png"] },
+        { id: "m4", title: "Плитка фасадная Techno", type: "Плитка", brand: "Технониколь", priceValue: 1350, price: "1 350 ₽ / м²", usePhotoGallery: true, cover: "assets/supply-2-technonicol.png", gallery: ["assets/supply-2-technonicol.png"] }
+      ];
+      /* Цены «от …» как на https://maxigroup.pro/ (блок «Что мы строим») — только совпадающие карточки */
+      var materialsCatalogRaw = [
+        { id: "mc-bloki", title: "Дома из блоков", type: "Жилая застройка", brand: "Иллюстрации", priceValue: 3500000, price: "от 3 500 000 ₽", paths: ["assets/build-bloki.png"] },
+        { id: "mc-brus", title: "Дома из бруса", type: "Жилая застройка", brand: "Иллюстрации", priceValue: 3500000, price: "от 3 500 000 ₽", paths: ["assets/build-brus.png"] },
+        { id: "mc-breven", title: "Дома из брёвен", type: "Жилая застройка", brand: "Иллюстрации", priceValue: 3500000, price: "от 3 500 000 ₽", paths: ["assets/build-breven.png"] },
+        { id: "mc-kirpich", title: "Дома из кирпича", type: "Жилая застройка", brand: "Иллюстрации", priceValue: 3500000, price: "от 3 500 000 ₽", paths: ["assets/build-kirpich.png"] },
+        { id: "mc-karkas", title: "Каркасные дома", type: "Жилая застройка", brand: "Иллюстрации", priceValue: 3500000, price: "от 3 500 000 ₽", paths: ["assets/build-karkas.png"] },
+        { id: "mc-lafet", title: "Дома из лафета", type: "Жилая застройка", brand: "Иллюстрации", priceValue: 3500000, price: "от 3 500 000 ₽", paths: ["assets/build-lafet.png"] },
+        { id: "mc-bani", title: "Бани", type: "Жилая застройка", brand: "Иллюстрации", priceValue: 3500000, price: "от 3 500 000 ₽", paths: ["assets/build-bani.png"] },
+        { id: "mc-besedki", title: "Беседки", type: "Жилая застройка", brand: "Иллюстрации", priceValue: 3500000, price: "от 3 500 000 ₽", paths: ["assets/build-besedki.png"] },
+        { id: "mc-garagi", title: "Гаражи", type: "Жилая застройка", brand: "Иллюстрации", priceValue: 3500000, price: "от 3 500 000 ₽", paths: ["assets/build-garagi.png"] },
+        { id: "mc-gazobeton", title: "Дома из газобетона", type: "Жилая застройка", brand: "Иллюстрации", priceValue: 3500000, price: "от 3 500 000 ₽", paths: ["assets/build-gazobeton.png"] },
+        { id: "mc-sip", title: "Дома из SIP-панелей", type: "Жилая застройка", brand: "Иллюстрации", priceValue: 3500000, price: "от 3 500 000 ₽", paths: ["assets/build-sip.png"] },
+        { id: "mc-lstk", title: "Дома из ЛСТК", type: "Жилая застройка", brand: "Иллюстрации", priceValue: 3500000, price: "от 3 500 000 ₽", paths: ["assets/build-lstk.png"] },
+        { id: "mc-blago", title: "Благоустройство", type: "Благоустройство", brand: "Иллюстрации", priceValue: 1e15, price: "", paths: ["assets/blago-hero.png"] },
+        { id: "mc-admin", title: "Административные объекты", type: "Коммерция и объекты", brand: "Иллюстрации", priceValue: 1e15, price: "", paths: ["assets/object-admin.png"] },
+        { id: "mc-public", title: "Общественные объекты", type: "Коммерция и объекты", brand: "Иллюстрации", priceValue: 1e15, price: "", paths: ["assets/object-public.png"] },
+        { id: "mc-industrial", title: "Промышленные объекты", type: "Коммерция и объекты", brand: "Иллюстрации", priceValue: 1e15, price: "", paths: ["assets/object-industrial.png"] },
+        { id: "mc-fotpodr", title: "Объекты строительства", type: "Портфолио", brand: "Иллюстрации", priceValue: 1e15, price: "", paths: ["assets/fotPodr.png"] }
+      ];
+      var materialsBaseNorm = materialsBase.map(mediaProject);
+      var catalogForConstruction = materialsCatalogRaw
+        .filter(function (r) {
+          return r.id !== "mc-fotpodr" && r.id !== "mc-kirpich";
+        })
+        .map(mapCatalogRow);
+      var construction = catalogForConstruction;
+      var materials = materialsBaseNorm;
+
+      var map = {};
+      construction.concat(materials).forEach(function (x) { map[x.id] = x; });
+
+      var tabs = document.querySelectorAll(".tab");
+      tabs.forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          tabs.forEach(function (t) { t.setAttribute("aria-selected", t === tab ? "true" : "false"); });
+          document.getElementById("panel-construction").hidden = tab.dataset.panel !== "construction";
+          document.getElementById("panel-materials").hidden = tab.dataset.panel !== "materials";
+          document.getElementById("panel-windows").hidden = tab.dataset.panel !== "windows";
+        });
+      });
+
+      var constructionTypes = ["Все типы"].concat(
+        construction.map(function (x) { return x.type; }).filter(function (v, i, a) { return v && a.indexOf(v) === i; })
+      );
+      var stylesWrap = document.getElementById("styles");
+      var styleSelect = document.getElementById("fStyle");
+      stylesWrap.innerHTML = constructionTypes.map(function (s, i) {
+        var v = s === "Все типы" ? "" : s;
+        return '<button class="chip" data-v="' + escAttr(v) + '" aria-pressed="' + (i === 0 ? "true" : "false") + '">' + escHtml(s) + "</button>";
+      }).join("");
+      styleSelect.innerHTML = '<option value="">Все типы</option>' + constructionTypes.slice(1).map(function (s) {
+        return '<option value="' + escAttr(s) + '">' + escHtml(s) + "</option>";
+      }).join("");
+      var materialSelect = document.getElementById("fMaterial");
+      var materialsInConstruction = ["Все материалы"].concat(
+        construction.map(function (x) { return x.material; }).filter(function (v, i, a) { return v && a.indexOf(v) === i; })
+      );
+      materialSelect.innerHTML = '<option value="">Все материалы</option>' + materialsInConstruction.slice(1).map(function (m) {
+        return '<option value="' + escAttr(m) + '">' + escHtml(m) + "</option>";
+      }).join("");
+      var activeConstructionType = "";
+
+      function renderConstruction() {
+        var a = Number(document.getElementById("fArea").value || 0);
+        var p = Number(document.getElementById("fPrice").value || 0);
+        var t = activeConstructionType || styleSelect.value;
+        var m = materialSelect.value;
+        var list = construction.filter(function (x) {
+          return (!a || x.areaValue >= a) && (!p || x.priceValue <= p) && (!t || x.type === t) && (!m || x.material === m);
+        });
+        document.getElementById("constructionGrid").innerHTML = list.length
+          ? list
+              .map(function (x) {
+                return card(x, "construction");
+              })
+              .join("")
+          : '<div class="empty">Нет карточек по выбранным фильтрам.</div>';
+      }
+      stylesWrap.addEventListener("click", function (e) {
+        var b = e.target.closest(".chip");
+        if (!b) return;
+        activeConstructionType = b.dataset.v || "";
+        styleSelect.value = activeConstructionType;
+        stylesWrap.querySelectorAll(".chip").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+        renderConstruction();
+      });
+      ["fArea", "fPrice", "fStyle", "fMaterial"].forEach(function (id) {
+        document.getElementById(id).addEventListener("input", function () {
+          activeConstructionType = "";
+          renderConstruction();
+        });
+      });
+
+      var typeSel = document.getElementById("mType");
+      var priceSel = document.getElementById("mPrice");
+      var brandSel = document.getElementById("mBrand");
+      var types = materials.map(function (x) { return x.type; }).filter(function (v, i, a) { return v && a.indexOf(v) === i; });
+      var brands = materials.map(function (x) { return x.brand; }).filter(function (v, i, a) { return v && a.indexOf(v) === i; });
+      typeSel.innerHTML = '<option value="">Все типы материала</option>' + types.map(function (x) {
+        return '<option value="' + escAttr(x) + '">' + escHtml(x) + "</option>";
+      }).join("");
+      brandSel.innerHTML = '<option value="">Все производители</option>' + brands.map(function (x) {
+        return '<option value="' + escAttr(x) + '">' + escHtml(x) + "</option>";
+      }).join("");
+      function renderMaterials() {
+        var t = typeSel.value, b = brandSel.value, p = Number(priceSel.value || 0);
+        var list = materials.filter(function (x) {
+          return (!t || x.type === t) && (!b || x.brand === b) && (!p || x.priceValue <= p);
+        });
+        document.getElementById("materialsGrid").innerHTML = list.length
+          ? list
+              .map(function (x) {
+                return card(x, "materials");
+              })
+              .join("")
+          : '<div class="empty">Нет материалов по выбранным фильтрам.</div>';
+      }
+      [typeSel, priceSel, brandSel].forEach(function (el) { el.addEventListener("input", renderMaterials); });
+
+      function bindOpen(rootId) {
+        var root = document.getElementById(rootId);
+        root.addEventListener("click", function (e) {
+          var c = e.target.closest(".card");
+          if (!c) return;
+          open(map[c.dataset.id]);
+        });
+        root.addEventListener("keydown", function (e) {
+          var c = e.target.closest(".card");
+          if (!c) return;
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            open(map[c.dataset.id]);
+          }
+        });
+      }
+      bindOpen("constructionGrid");
+      bindOpen("materialsGrid");
+      renderConstruction();
+      renderMaterials();
+    })();
+  </script>
+</body>
+</html>
